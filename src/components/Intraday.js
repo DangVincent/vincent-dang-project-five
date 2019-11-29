@@ -26,7 +26,12 @@ export default class Intraday extends Component {
                 }
         })
         .then((result) => {
-            console.log(result);
+            console.log(result.data['Time Series (1min)']);
+            const values = Object.values(result.data['Time Series (1min)']);
+            console.log(values[0]);
+
+            // intradayArray.push(result.data['Time Series (1min)']);
+            // console.log(intradayArray);
 
             // this.setState({
 
@@ -36,16 +41,6 @@ export default class Intraday extends Component {
             console.log(error);
         });
     }
-
-    // componentDidUpdate(prevProps) {
-    //     if (this.props.stockEquitySymbol !== prevProps.stockEquitySymbol) {
-
-    //         this.setState({
-    //             symbol: this.props.stockEquitySymbol
-    //         });
-
-    //     }
-    // }
     
     render() {
         
