@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import Header from './components/Header';
+import Global from './components/Global';
 import Intraday from './components/Intraday';
 import Daily from './components/Daily';
 import Weekly from './components/Weekly';
@@ -67,6 +68,9 @@ export default class App extends Component {
                 <div className="wrapper">
                 <h2>{stockName} ({stockSymbol})</h2>
                   <ul>
+                    <li>
+                    <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/>
+                    </li>
                     <li>
                       <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/>
                     </li>
