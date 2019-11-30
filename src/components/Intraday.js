@@ -27,9 +27,7 @@ export default class Intraday extends Component {
         })
         .then((result) => {
             console.log(result);
-            // console.log(result.data['Time Series (1min)']);
             const values = Object.values(result.data['Time Series (1min)']);
-            // console.log(values[0]);
             const highValue = values[0]['2. high'];
             const lowValue = values[0]['3. low'];
             const closeValue = values[0]['4. close'];
@@ -63,14 +61,49 @@ export default class Intraday extends Component {
         } = this.state;
 
         if (isLoading) {
-          return(
-            <div className="preloader">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-          )
+            return(
+                <div className="timeSeriesContainer">
+                    <h3>intraday data</h3>
+                    <ul>
+                        <li>
+                            <p>high</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </li>
+                        <li>
+                            <p>low</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </li>
+                        <li>
+                            <p>close</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </li>
+                        <li>
+                            <p>volume</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            )
         } 
 
         return (

@@ -8,7 +8,8 @@ export default class Monthly extends Component {
             monthlyHigh: '',
             monthlyLow: '',
             monthlyClose: '',
-            monthlyVolume: ''
+            monthlyVolume: '',
+            isLoading: true
         }
     }
 
@@ -25,9 +26,7 @@ export default class Monthly extends Component {
                 }
         })
         .then((result) => {
-            // console.log(result.data['Monthly Time Series']);
             const values = Object.values(result.data['Monthly Time Series']);
-            // console.log(values[0]);
             const highValue = values[0]["2. high"];
             const lowValue = values[0]["3. low"];
             const closeValue = values[0]["4. close"];
@@ -37,7 +36,8 @@ export default class Monthly extends Component {
                 monthlyHigh: Number(highValue).toFixed(2),
                 monthlyLow: Number(lowValue).toFixed(2),
                 monthlyClose: Number(closeValue).toFixed(2),
-                monthlyVolume: volumeValue
+                monthlyVolume: volumeValue,
+                isLoading: false
             });
         })
         .catch((error) => {
@@ -54,8 +54,37 @@ export default class Monthly extends Component {
             monthlyHigh,
             monthlyLow,
             monthlyClose,
-            monthlyVolume
+            monthlyVolume,
+            isLoading
         } = this.state;
+
+        if (isLoading) {
+            return(
+                <div className="timeSeriesContainer">
+                    <div className="preloader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <h3>monthly data</h3>
+                    <ul>
+                        <li>
+                            <p>high</p>
+                        </li>
+                        <li>
+                            <p>low</p>
+                        </li>
+                        <li>
+                            <p>close</p>
+                        </li>
+                        <li>
+                            <p>volume</p>
+                        </li>
+                    </ul>
+                </div>
+            )
+        }
 
         return (
             <div className="timeSeriesContainer">

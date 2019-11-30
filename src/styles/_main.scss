@@ -1,9 +1,18 @@
+main {
+    ul {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 50px;
+        border: 1px solid black;
+        padding-bottom: 50px;
+    }
+}
 .preloader div {
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 34px;
+    height: 34px;
     margin: 8px;
     border: 8px solid lightgreen;
     border-radius: 50%;
@@ -27,4 +36,35 @@
     100% {
         transform: rotate(360deg);
     }
+}
+.flickity-enabled {
+    position: relative;
+}
+
+.flickity-enabled:focus {
+    outline: none;
+}
+
+.flickity-viewport {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+
+.flickity-slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* ---- previous/next buttons ---- */
+
+.flickity-prev-next-button {
+    display: none;
+}
+
+/* ---- page dots ---- */
+
+.flickity-page-dots {
+    display: none;
 }

@@ -62,11 +62,28 @@ export default class Daily extends Component {
 
         if (isLoading) {
             return(
-                <div className="preloader">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                <div className="timeSeriesContainer">
+                    <div className="preloader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <h3>daily data</h3>
+                    <ul>
+                        <li>
+                            <p>high</p>
+                        </li>
+                        <li>
+                            <p>low</p>
+                        </li>
+                        <li>
+                            <p>close</p>
+                        </li>
+                        <li>
+                            <p>volume</p>
+                        </li>
+                    </ul>
                 </div>
             )
         } 

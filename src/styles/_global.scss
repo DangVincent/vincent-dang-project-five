@@ -4,6 +4,12 @@ html {
 h1, h3, p {
     text-transform: capitalize;
 }
+h2, h3 {
+    text-align: center;
+}
+p {
+    margin-bottom: 20px;
+}
 h1 {
     span {
         text-transform: uppercase;

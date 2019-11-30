@@ -6,7 +6,7 @@ import Intraday from './components/Intraday';
 import Daily from './components/Daily';
 import Weekly from './components/Weekly';
 import Monthly from './components/Monthly';
-import Footer from './components/Footer';
+import Ticker from './components/Ticker';
 import axios from 'axios';
 
 export default class App extends Component {
@@ -15,17 +15,14 @@ export default class App extends Component {
       this.state = {
         stockName: '',
         stockSymbol: 'MSFT',
+        stockPrice: '',
         reactApiKey: process.env.REACT_APP_ALPHAVANTAGE_API_KEY,
-        // reactApiKey2: process.env.REACT_APP_ALPHAVANTAGE2_API_KEY,
-        // reactApiKey3: process.env.REACT_APP_ALPHAVANTAGE3_API_KEY,
-        // reactApiKey4: process.env.REACT_APP_ALPHAVANTAGE4_API_KEY,
-        // reactApiKey5: process.env.REACT_APP_ALPHAVANTAGE5_API_KEY,
-        isLoading: false,
         timeSeriesGlobal: true,
         timeSeriesIntraday: false,
         timeSeriesDaily: false,
         timeSeriesWeekly: false,
         timeSeriesMonthly: false,
+        isLoading: true
       }
     }
     
@@ -33,14 +30,21 @@ export default class App extends Component {
   
       axios.get('https://financialmodelingprep.com/api/v3/company/stock/list')
       .then((result) => {
-        console.log(result);
-        // const symbol = ; 
-        // const name = ;
-        // this.setState({
-        //   stockName: name,
-        //   stockSymbol: symbol,
-        //   isLoading: false
-        // });
+        const symbolsList = result.data.symbolsList;
+        const originalSymbolsList = [...symbolsList];
+        const stock = originalSymbolsList.filter((item) => {
+          return item.symbol === this.state.stockSymbol;
+        });
+        console.log(stock);
+        const symbol = stock[0].symbol; 
+        const name = stock[0].name;
+        const price = stock[0].price;
+        this.setState({
+          stockName: name,
+          stockSymbol: symbol,
+          stockPrice: price,
+          isLoading: false
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -50,13 +54,23 @@ export default class App extends Component {
     componentDidMount() {
         this.getStockInfo();
     }
+    handleSwitchGlobal = () => {
+      this.setState({
+        timeSeriesGlobal: true,
+        timeSeriesIntraday: false,
+        timeSeriesDaily: false,
+        timeSeriesWeekly: false,
+        timeSeriesMonthly: false
+      });
+    };
 
     handleSwitchIntraday = () => {
       this.setState({
         timeSeriesIntraday: true,
         timeSeriesGlobal: false,
         timeSeriesDaily: false,
-        timeSeriesWeekly: false
+        timeSeriesWeekly: false,
+        timeSeriesMonthly: false
       });
     };
 
@@ -65,29 +79,37 @@ export default class App extends Component {
         timeSeriesDaily: true,
         timeSeriesGlobal: false,
         timeSeriesIntraday: false,
-        timeSeriesWeekly: false
+        timeSeriesWeekly: false,
+        timeSeriesMonthly: false
       });
     };
 
     handleSwitchWeekly = () => {
       this.setState({
         timeSeriesWeekly: true,
-        timeSeriesDaily: false,
-        timeSeriesIntraday: false,
         timeSeriesGlobal: false,
+        timeSeriesIntraday: false,
+        timeSeriesDaily: false,
+        timeSeriesMonthly: false
       });
     };
 
-    // handleSwitchWeekly = () => {
-    //   this.setState(prevState => ({
-    //     timeSeriesWeekly: !prevState.timeSeriesWeekly
-    //   }));
-    // };
+    handleSwitchMonthly = () => {
+      this.setState({
+        timeSeriesMonthly: true,
+        timeSeriesGlobal: false,
+        timeSeriesIntraday: false,
+        timeSeriesDaily: false,
+        timeSeriesWeekly: false
+      });
+    };
+
     render() {
       
       const {
         stockName, 
         stockSymbol,
+        stockPrice,
         reactApiKey,
         isLoading,
         timeSeriesGlobal,
@@ -115,21 +137,27 @@ export default class App extends Component {
               </header>
               <main>
                 <div className="wrapper">
-                <h2>{stockName} ({stockSymbol})</h2>
+                <h2>{stockName} ({stockSymbol}) {stockPrice}</h2>
+
                 {timeSeriesGlobal && <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
-                {timeSeriesIntraday && (!timeSeriesDaily) && (!timeSeriesWeekly) && <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
-                {timeSeriesDaily && (!timeSeriesIntraday) && (!timeSeriesWeekly) && <Daily apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
-                {timeSeriesWeekly && (!timeSeriesIntraday) && (!timeSeriesDaily) && <Weekly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> }
-                {/* {(!timeSeriesMonthly) ? <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> : <Monthly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> } */}
-                <button onClick={this.handleSwitchIntraday}>intraday</button>
-                <button onClick={this.handleSwitchDaily}>daily</button>
-                <button onClick={this.handleSwitchWeekly}>weekly</button>
-                {/* <button onClick={this.handleSwitchMonthly}>monthly</button> */}
+                {timeSeriesIntraday && (!timeSeriesDaily) && (!timeSeriesWeekly) && (!timeSeriesMonthly) && <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
+                {timeSeriesDaily && (!timeSeriesIntraday) && (!timeSeriesWeekly) && (!timeSeriesMonthly) && <Daily apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
+                {timeSeriesWeekly && (!timeSeriesIntraday) && (!timeSeriesDaily) && (!timeSeriesMonthly) && <Weekly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> }
+                {timeSeriesMonthly && (!timeSeriesIntraday) && (!timeSeriesDaily) && (!timeSeriesWeekly) && <Monthly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> }
+
+                {(!timeSeriesGlobal) ? <button onClick={this.handleSwitchGlobal}>global</button> : null}  
+                {(!timeSeriesIntraday) ? <button onClick={this.handleSwitchIntraday}>intraday</button> : null}
+                {(!timeSeriesDaily) ? <button onClick={this.handleSwitchDaily}>daily</button> : null}
+                {(!timeSeriesWeekly) ? <button onClick={this.handleSwitchWeekly}>weekly</button> : null}
+                {(!timeSeriesMonthly) ? <button onClick={this.handleSwitchMonthly}>monthly</button> : null}
                 
                 </div> 
               </main>
               <footer>
-                <Footer />
+                <Ticker />
+                <div className="wrapper">
+                  <p>copyright vincent 2019</p>
+                </div>
               </footer>
             </div>
         );

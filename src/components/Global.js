@@ -6,9 +6,9 @@ export default class Global extends Component {
     constructor() {
         super();
         this.state = {
+            globalDate: '',
             globalHigh: '',
             globalLow: '',
-            globalPrice: '',
             globalVolume: '',
             globalChange: '',
             globalChangePercent: '',
@@ -19,24 +19,24 @@ export default class Global extends Component {
     getGlobalEquityData() {
         axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${this.props.stockEquitySymbol}?timeseries=5`)
         .then((result) => {
-            console.log(result);
-            // const globalData = result.data['Global Quote'];
-            // const highValue = globalData['03. high'];
-            // const lowValue = globalData['04. low'];
-            // const priceValue = globalData['05. price'];
-            // const volumeValue = globalData['06. volume'];
-            // const changeValue = globalData['09. change'];
-            // const changePercentValue = globalData['10. change percent'];
+            console.log(result.data.historical[0]);
+            const globalData = result.data.historical[0];
+            const dateValue = globalData.date;
+            const highValue = globalData.high;
+            const lowValue = globalData.low;
+            const volumeValue = globalData.volume;
+            const changeValue = globalData.change;
+            const changePercentValue = globalData.changePercent;
             
-            // this.setState({
-            //     globalHigh: highValue,
-            //     globalLow: lowValue,
-            //     globalPrice: priceValue,
-            //     globalVolume: volumeValue,
-            //     globalChange: changeValue,
-            //     globalChangePercent: changePercentValue,
-            //     isLoading: false
-            // })
+            this.setState({
+                globalDate: dateValue,
+                globalHigh: highValue,
+                globalLow: lowValue,
+                globalVolume: volumeValue,
+                globalChange: changeValue,
+                globalChangePercent: changePercentValue,
+                isLoading: false
+            })
         }).catch((error) => {
             console.log(error);
         });
@@ -50,7 +50,7 @@ export default class Global extends Component {
         const {
             globalHigh,
             globalLow,
-            globalPrice,
+            globalDate,
             globalVolume,
             globalChange,
             globalChangePercent,
@@ -59,11 +59,34 @@ export default class Global extends Component {
 
         if (isLoading) {
             return(
-                <div className="preloader">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                <div className="timeSeriesContainer">
+                    <div className="preloader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <h3>global data</h3>
+                    <ul>
+                        <li>
+                            <p>last updated</p>
+                        </li>
+                        <li>
+                            <p>high</p>
+                        </li>
+                        <li>
+                            <p>low</p>
+                        </li>
+                        <li>
+                            <p>volume</p>
+                        </li>
+                        <li>
+                            <p>change</p>
+                        </li>
+                        <li>
+                            <p>change (%)</p>
+                        </li>
+                    </ul>
                 </div>
             )
         } 
@@ -73,16 +96,16 @@ export default class Global extends Component {
                 <h3>global data</h3>
                 <ul>
                     <li>
+                        <p>last updated</p>
+                        <p>{globalDate}</p>
+                    </li>
+                    <li>
                         <p>high</p>
                         <p>{globalHigh}</p>
                     </li>
                     <li>
                         <p>low</p>
                         <p>{globalLow}</p>
-                    </li>
-                    <li>
-                        <p>price</p>
-                        <p>{globalPrice}</p>
                     </li>
                     <li>
                         <p>volume</p>
