@@ -11,38 +11,32 @@ export default class Global extends Component {
             globalPrice: '',
             globalVolume: '',
             globalChange: '',
-            globalChangePercent: ''
+            globalChangePercent: '',
+            isLoading: true
         }
     }
 
     getGlobalEquityData() {
-        axios({
-            method:'GET',
-            url: `https://www.alphavantage.co/query`,
-            dataResponse: 'json',
-                params: {
-                    apikey: this.props.apiKey,
-                    function: 'GLOBAL_QUOTE',
-                    symbol: this.props.stockEquitySymbol
-                }
-        }).then((result) => {
-            // console.log(result.data['Global Quote']);
-            const globalData = result.data['Global Quote'];
-            const highValue = globalData['03. high'];
-            const lowValue = globalData['04. low'];
-            const priceValue = globalData['05. price'];
-            const volumeValue = globalData['06. volume'];
-            const changeValue = globalData['09. change'];
-            const changePercentValue = globalData['10. change percent'];
+        axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${this.props.stockEquitySymbol}?timeseries=5`)
+        .then((result) => {
+            console.log(result);
+            // const globalData = result.data['Global Quote'];
+            // const highValue = globalData['03. high'];
+            // const lowValue = globalData['04. low'];
+            // const priceValue = globalData['05. price'];
+            // const volumeValue = globalData['06. volume'];
+            // const changeValue = globalData['09. change'];
+            // const changePercentValue = globalData['10. change percent'];
             
-            this.setState({
-                globalHigh: highValue,
-                globalLow: lowValue,
-                globalPrice: priceValue,
-                globalVolume: volumeValue,
-                globalChange: changeValue,
-                globalChangePercent: changePercentValue,
-            })
+            // this.setState({
+            //     globalHigh: highValue,
+            //     globalLow: lowValue,
+            //     globalPrice: priceValue,
+            //     globalVolume: volumeValue,
+            //     globalChange: changeValue,
+            //     globalChangePercent: changePercentValue,
+            //     isLoading: false
+            // })
         }).catch((error) => {
             console.log(error);
         });
@@ -59,9 +53,20 @@ export default class Global extends Component {
             globalPrice,
             globalVolume,
             globalChange,
-            globalChangePercent
+            globalChangePercent,
+            isLoading
         } = this.state;
 
+        if (isLoading) {
+            return(
+                <div className="preloader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            )
+        } 
 
         return (
             <div className="timeSeriesContainer">

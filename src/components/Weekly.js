@@ -8,7 +8,8 @@ export default class Weekly extends Component {
             weeklyHigh: '',
             weeklyLow: '',
             weeklyClose: '',
-            weeklyVolume: ''
+            weeklyVolume: '',
+            isLoading: true
         }
     }
 
@@ -37,7 +38,8 @@ export default class Weekly extends Component {
                 weeklyHigh: Number(highValue).toFixed(2),
                 weeklyLow: Number(lowValue).toFixed(2),
                 weeklyClose: Number(closeValue).toFixed(2),
-                weeklyVolume: volumeValue
+                weeklyVolume: volumeValue,
+                isLoading: false
             });
         })
         .catch((error) => {
@@ -54,8 +56,20 @@ export default class Weekly extends Component {
             weeklyHigh,
             weeklyLow,
             weeklyClose,
-            weeklyVolume
+            weeklyVolume,
+            isLoading
         } = this.state;
+
+        if (isLoading) {
+            return(
+                <div className="preloader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            )
+        } 
 
         return (
             <div className="timeSeriesContainer">

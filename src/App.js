@@ -14,39 +14,33 @@ export default class App extends Component {
       super();
       this.state = {
         stockName: '',
-        stockSymbol: '',
+        stockSymbol: 'MSFT',
         reactApiKey: process.env.REACT_APP_ALPHAVANTAGE_API_KEY,
-        isLoading: true,
+        // reactApiKey2: process.env.REACT_APP_ALPHAVANTAGE2_API_KEY,
+        // reactApiKey3: process.env.REACT_APP_ALPHAVANTAGE3_API_KEY,
+        // reactApiKey4: process.env.REACT_APP_ALPHAVANTAGE4_API_KEY,
+        // reactApiKey5: process.env.REACT_APP_ALPHAVANTAGE5_API_KEY,
+        isLoading: false,
         timeSeriesGlobal: true,
         timeSeriesIntraday: false,
         timeSeriesDaily: false,
         timeSeriesWeekly: false,
-        timeSeriesMonthly: false
+        timeSeriesMonthly: false,
       }
     }
     
     getStockInfo() {
-
-      const {reactApiKey} = this.state;
   
-      axios({
-        method:'GET',
-        url: `https://www.alphavantage.co/query`,
-        dataResponse: 'json',
-            params: {
-                apikey: reactApiKey,
-                function: 'SYMBOL_SEARCH',
-                keywords: 'MSFT',
-            }
-      })
+      axios.get('https://financialmodelingprep.com/api/v3/company/stock/list')
       .then((result) => {
-        const symbol = result.data.bestMatches[0]["1. symbol"]; 
-        const name = result.data.bestMatches[0]["2. name"];
-        this.setState({
-          stockName: name,
-          stockSymbol: symbol,
-          isLoading: false
-        });
+        console.log(result);
+        // const symbol = ; 
+        // const name = ;
+        // this.setState({
+        //   stockName: name,
+        //   stockSymbol: symbol,
+        //   isLoading: false
+        // });
       })
       .catch((error) => {
         console.log(error);
@@ -58,32 +52,37 @@ export default class App extends Component {
     }
 
     handleSwitchIntraday = () => {
-      this.setState(prevState => ({
-        timeSeriesIntraday: !prevState.timeSeriesIntraday,
-        timeSeriesGlobal: !prevState.timeSeriesGlobal,
-        timeSeriesDaily: false
-      }));
+      this.setState({
+        timeSeriesIntraday: true,
+        timeSeriesGlobal: false,
+        timeSeriesDaily: false,
+        timeSeriesWeekly: false
+      });
     };
 
     handleSwitchDaily = () => {
-      this.setState(prevState => ({
-        timeSeriesDaily: !prevState.timeSeriesDaily,
-        timeSeriesGlobal: !prevState.timeSeriesGlobal,
-        timeSeriesIntraday: false
-      }));
+      this.setState({
+        timeSeriesDaily: true,
+        timeSeriesGlobal: false,
+        timeSeriesIntraday: false,
+        timeSeriesWeekly: false
+      });
     };
 
     handleSwitchWeekly = () => {
-      this.setState(prevState => ({
-        timeSeriesWeekly: !prevState.timeSeriesWeekly
-      }));
+      this.setState({
+        timeSeriesWeekly: true,
+        timeSeriesDaily: false,
+        timeSeriesIntraday: false,
+        timeSeriesGlobal: false,
+      });
     };
 
-    handleSwitchWeekly = () => {
-      this.setState(prevState => ({
-        timeSeriesWeekly: !prevState.timeSeriesWeekly
-      }));
-    };
+    // handleSwitchWeekly = () => {
+    //   this.setState(prevState => ({
+    //     timeSeriesWeekly: !prevState.timeSeriesWeekly
+    //   }));
+    // };
     render() {
       
       const {
@@ -109,9 +108,6 @@ export default class App extends Component {
         )
       } 
 
-      // if () {
-
-      // }
         return (
             <div className="App">
               <header>
@@ -121,14 +117,13 @@ export default class App extends Component {
                 <div className="wrapper">
                 <h2>{stockName} ({stockSymbol})</h2>
                 {timeSeriesGlobal && <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
-                {timeSeriesIntraday && <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
-                {timeSeriesDaily && (!timeSeriesIntraday) && <Daily apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
-                {/* {(!timeSeriesDaily) ? <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> :  } */}
-                {/* {(!timeSeriesWeekly) ? <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> : <Weekly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> } */}
+                {timeSeriesIntraday && (!timeSeriesDaily) && (!timeSeriesWeekly) && <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
+                {timeSeriesDaily && (!timeSeriesIntraday) && (!timeSeriesWeekly) && <Daily apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
+                {timeSeriesWeekly && (!timeSeriesIntraday) && (!timeSeriesDaily) && <Weekly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> }
                 {/* {(!timeSeriesMonthly) ? <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> : <Monthly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> } */}
                 <button onClick={this.handleSwitchIntraday}>intraday</button>
                 <button onClick={this.handleSwitchDaily}>daily</button>
-                {/* <button onClick={this.handleSwitchWeekly}>weeklyy</button> */}
+                <button onClick={this.handleSwitchWeekly}>weekly</button>
                 {/* <button onClick={this.handleSwitchMonthly}>monthly</button> */}
                 
                 </div> 

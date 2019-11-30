@@ -8,7 +8,8 @@ export default class Daily extends Component {
             dailyHigh: '',
             dailyLow: '',
             dailyClose: '',
-            dailyVolume: ''
+            dailyVolume: '',
+            isLoading: true
         }
     }
 
@@ -24,6 +25,7 @@ export default class Daily extends Component {
                 }
         })
         .then((result) => {
+            console.log(result);
             // console.log(result.data['Time Series (Daily)']);
             const values = Object.values(result.data['Time Series (Daily)']);
             // console.log(values[0]);
@@ -36,7 +38,8 @@ export default class Daily extends Component {
                 dailyHigh: Number(highValue).toFixed(2),
                 dailyLow: Number(lowValue).toFixed(2),
                 dailyClose: Number(closeValue).toFixed(2),
-                dailyVolume: volumeValue
+                dailyVolume: volumeValue,
+                isLoading: false
             });
         })
         .catch((error) => {
@@ -53,8 +56,20 @@ export default class Daily extends Component {
             dailyHigh,
             dailyLow,
             dailyClose,
-            dailyVolume
+            dailyVolume,
+            isLoading
         } = this.state;
+
+        if (isLoading) {
+            return(
+                <div className="preloader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            )
+        } 
 
         return (
             <div className="timeSeriesContainer">

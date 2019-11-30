@@ -8,7 +8,8 @@ export default class Intraday extends Component {
             intradayHigh: '',
             intradayLow: '',
             intradayClose: '',
-            intradayVolume: ''
+            intradayVolume: '',
+            isLoading: true
         }
     }
     
@@ -25,6 +26,7 @@ export default class Intraday extends Component {
                 }
         })
         .then((result) => {
+            console.log(result);
             // console.log(result.data['Time Series (1min)']);
             const values = Object.values(result.data['Time Series (1min)']);
             // console.log(values[0]);
@@ -37,7 +39,8 @@ export default class Intraday extends Component {
                 intradayHigh: Number(highValue).toFixed(2),
                 intradayLow: Number(lowValue).toFixed(2),
                 intradayClose: Number(closeValue).toFixed(2),
-                intradayVolume: volumeValue
+                intradayVolume: volumeValue,
+                isLoading: false
             });
         })
         .catch((error) => {
@@ -48,10 +51,6 @@ export default class Intraday extends Component {
     componentDidMount() {
         this.getIntradayEquityData();        
     }
-    
-    handleSwitchGlobal = () => {
-
-    }
 
     render() {
         
@@ -59,8 +58,20 @@ export default class Intraday extends Component {
             intradayHigh,
             intradayLow,
             intradayClose,
-            intradayVolume
+            intradayVolume,
+            isLoading
         } = this.state;
+
+        if (isLoading) {
+          return(
+            <div className="preloader">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+          )
+        } 
 
         return (
             <div className="timeSeriesContainer">
@@ -82,8 +93,7 @@ export default class Intraday extends Component {
                         <p>volume</p>
                         <p>{intradayVolume}</p>
                     </li>
-                </ul>\
-                <button onClick={this.handleSwitchGlobal}>global</button>
+                </ul>
             </div>
         );
     };
