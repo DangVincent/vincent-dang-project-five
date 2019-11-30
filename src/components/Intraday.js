@@ -12,8 +12,7 @@ export default class Intraday extends Component {
         }
     }
     
-    componentDidMount() {
-
+    getIntradayEquityData() {
         axios({
             method:'GET',
             url: `https://www.alphavantage.co/query`,
@@ -29,11 +28,11 @@ export default class Intraday extends Component {
             // console.log(result.data['Time Series (1min)']);
             const values = Object.values(result.data['Time Series (1min)']);
             // console.log(values[0]);
-            const highValue = values[0]["2. high"];
-            const lowValue = values[0]["3. low"];
-            const closeValue = values[0]["4. close"];
-            const volumeValue = values[0]["5. volume"];
-            
+            const highValue = values[0]['2. high'];
+            const lowValue = values[0]['3. low'];
+            const closeValue = values[0]['4. close'];
+            const volumeValue = values[0]['5. volume'];
+
             this.setState({
                 intradayHigh: Number(highValue).toFixed(2),
                 intradayLow: Number(lowValue).toFixed(2),
@@ -45,7 +44,15 @@ export default class Intraday extends Component {
             console.log(error);
         });
     }
+
+    componentDidMount() {
+        this.getIntradayEquityData();        
+    }
     
+    handleSwitchGlobal = () => {
+
+    }
+
     render() {
         
         const {
@@ -57,7 +64,7 @@ export default class Intraday extends Component {
 
         return (
             <div className="timeSeriesContainer">
-                <h3>intraday</h3>
+                <h3>intraday data</h3>
                 <ul>
                     <li>
                         <p>high</p>
@@ -75,7 +82,8 @@ export default class Intraday extends Component {
                         <p>volume</p>
                         <p>{intradayVolume}</p>
                     </li>
-                </ul>
+                </ul>\
+                <button onClick={this.handleSwitchGlobal}>global</button>
             </div>
         );
     };

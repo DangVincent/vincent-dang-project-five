@@ -1,6 +1,14 @@
 html {
     font-size: 125%;
 }
+h1, h3, p {
+    text-transform: capitalize;
+}
+h1 {
+    span {
+        text-transform: uppercase;
+    }
+}
 ul {
     padding: 0;
     margin: 0;

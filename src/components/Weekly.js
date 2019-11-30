@@ -12,7 +12,7 @@ export default class Weekly extends Component {
         }
     }
 
-    componentDidMount() {
+    getWeeklyEquityData() {
 
         axios({
             method:'GET',
@@ -32,7 +32,7 @@ export default class Weekly extends Component {
             const lowValue = values[0]["3. low"];
             const closeValue = values[0]["4. close"];
             const volumeValue = values[0]["5. volume"];
-
+    
             this.setState({
                 weeklyHigh: Number(highValue).toFixed(2),
                 weeklyLow: Number(lowValue).toFixed(2),
@@ -45,6 +45,10 @@ export default class Weekly extends Component {
         });
     }
 
+    componentDidMount() {
+        this.getWeeklyEquityData();
+    }
+
     render() {
         const {
             weeklyHigh,
@@ -55,7 +59,7 @@ export default class Weekly extends Component {
 
         return (
             <div className="timeSeriesContainer">
-                <h3>weekly</h3>
+                <h3>weekly data</h3>
                 <ul>
                     <li>
                         <p>high</p>

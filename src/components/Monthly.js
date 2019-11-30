@@ -12,7 +12,7 @@ export default class Monthly extends Component {
         }
     }
 
-    componentDidMount() {
+    getMonthlyEquityData() {
 
         axios({
             method:'GET',
@@ -45,6 +45,10 @@ export default class Monthly extends Component {
         });
     }
 
+    componentDidMount() {
+        this.getMonthlyEquityData();
+    }
+
     render() {
         const {
             monthlyHigh,
@@ -55,7 +59,7 @@ export default class Monthly extends Component {
 
         return (
             <div className="timeSeriesContainer">
-                <h3>monthly</h3>
+                <h3>monthly data</h3>
                 <ul>
                     <li>
                         <p>high</p>

@@ -16,14 +16,19 @@ export default class App extends Component {
         stockName: '',
         stockSymbol: '',
         reactApiKey: process.env.REACT_APP_ALPHAVANTAGE_API_KEY,
-        loading: true
+        isLoading: true,
+        timeSeriesGlobal: true,
+        timeSeriesIntraday: false,
+        timeSeriesDaily: false,
+        timeSeriesWeekly: false,
+        timeSeriesMonthly: false
       }
     }
     
-    componentDidMount() {
+    getStockInfo() {
 
       const {reactApiKey} = this.state;
-
+  
       axios({
         method:'GET',
         url: `https://www.alphavantage.co/query`,
@@ -40,7 +45,7 @@ export default class App extends Component {
         this.setState({
           stockName: name,
           stockSymbol: symbol,
-          loading: false
+          isLoading: false
         });
       })
       .catch((error) => {
@@ -48,17 +53,65 @@ export default class App extends Component {
       }); 
     }
 
+    componentDidMount() {
+        this.getStockInfo();
+    }
+
+    handleSwitchIntraday = () => {
+      this.setState(prevState => ({
+        timeSeriesIntraday: !prevState.timeSeriesIntraday,
+        timeSeriesGlobal: !prevState.timeSeriesGlobal,
+        timeSeriesDaily: false
+      }));
+    };
+
+    handleSwitchDaily = () => {
+      this.setState(prevState => ({
+        timeSeriesDaily: !prevState.timeSeriesDaily,
+        timeSeriesGlobal: !prevState.timeSeriesGlobal,
+        timeSeriesIntraday: false
+      }));
+    };
+
+    handleSwitchWeekly = () => {
+      this.setState(prevState => ({
+        timeSeriesWeekly: !prevState.timeSeriesWeekly
+      }));
+    };
+
+    handleSwitchWeekly = () => {
+      this.setState(prevState => ({
+        timeSeriesWeekly: !prevState.timeSeriesWeekly
+      }));
+    };
     render() {
       
       const {
         stockName, 
         stockSymbol,
         reactApiKey,
-        loading
+        isLoading,
+        timeSeriesGlobal,
+        timeSeriesIntraday,
+        timeSeriesDaily,
+        timeSeriesWeekly,
+        timeSeriesMonthly,
       } = this.state;
 
-      if (loading) return <div />
+      if (isLoading) {
+        return(
+          <div className="preloader">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
+        )
+      } 
 
+      // if () {
+
+      // }
         return (
             <div className="App">
               <header>
@@ -67,23 +120,17 @@ export default class App extends Component {
               <main>
                 <div className="wrapper">
                 <h2>{stockName} ({stockSymbol})</h2>
-                  <ul>
-                    <li>
-                    <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/>
-                    </li>
-                    <li>
-                      <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/>
-                    </li>
-                    <li>
-                      <Daily apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/>
-                    </li>
-                    <li>
-                      <Weekly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/>
-                    </li>
-                    <li>
-                      <Monthly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/>
-                    </li>  
-                  </ul>
+                {timeSeriesGlobal && <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
+                {timeSeriesIntraday && <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
+                {timeSeriesDaily && (!timeSeriesIntraday) && <Daily apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
+                {/* {(!timeSeriesDaily) ? <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> :  } */}
+                {/* {(!timeSeriesWeekly) ? <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> : <Weekly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> } */}
+                {/* {(!timeSeriesMonthly) ? <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> : <Monthly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> } */}
+                <button onClick={this.handleSwitchIntraday}>intraday</button>
+                <button onClick={this.handleSwitchDaily}>daily</button>
+                {/* <button onClick={this.handleSwitchWeekly}>weeklyy</button> */}
+                {/* <button onClick={this.handleSwitchMonthly}>monthly</button> */}
+                
                 </div> 
               </main>
               <footer>

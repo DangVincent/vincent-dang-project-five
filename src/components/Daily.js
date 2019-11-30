@@ -12,8 +12,7 @@ export default class Daily extends Component {
         }
     }
 
-    componentDidMount() {
-
+    getDailyEquityData() {
         axios({
             method:'GET',
             url: `https://www.alphavantage.co/query`,
@@ -45,6 +44,10 @@ export default class Daily extends Component {
         });
     }
 
+    componentDidMount() {
+        this.getDailyEquityData();
+    }
+
     render() {
         const {
             dailyHigh,
@@ -55,7 +58,7 @@ export default class Daily extends Component {
 
         return (
             <div className="timeSeriesContainer">
-                <h3>daily</h3>
+                <h3>daily data</h3>
                 <ul>
                     <li>
                         <p>high</p>

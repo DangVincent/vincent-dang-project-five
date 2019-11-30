@@ -5,7 +5,7 @@ export default class Header extends Component {
         
         return (
             <div className="wrapper">
-                <h1>h-l index</h1>
+                <h1><span>h-l</span> index</h1>
             </div>
         );
     };
