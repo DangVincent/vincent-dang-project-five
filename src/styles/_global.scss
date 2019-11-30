@@ -1,14 +1,29 @@
+// MIXINS STARTS HERE
+@mixin fontSize1($sizeValue) {
+    font-size: $sizeValue;
+    font-family: 'Odibee Sans', cursive;
+}
+@mixin fontSize2($sizeValue2) {
+    font-size: $sizeValue2;
+    font-family: 'Oswald', sans-serif;
+}
+// MIXINS ENDS HERE
+// GLOBAL STYLES STARTS HERE
 html {
     font-size: 125%;
 }
 h1, h3, p {
     text-transform: capitalize;
 }
+h1, h2, h3 {
+    @include fontSize1(2rem);
+}
 h2, h3 {
     text-align: center;
 }
 p {
     margin-bottom: 20px;
+    @include fontSize2(1rem);
 }
 h1 {
     span {
@@ -27,3 +42,4 @@ ul li {
     width: 80%;
     margin: 0 auto;
 }
+// GLOBAL STYLES ENDS HERE

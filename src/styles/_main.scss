@@ -1,3 +1,4 @@
+// MAIN STYLES STARTS HERE
 main {
     ul {
         display: flex;
@@ -19,6 +20,7 @@ main {
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: lightgreen transparent transparent transparent;
 }
+// PRELOADER STYLES STARTS HERE
 .preloader div:nth-child(1) {
     animation-delay: -0.45s;
 }
@@ -28,7 +30,8 @@ main {
 .preloader div:nth-child(3) {
     animation-delay: -0.15s;
 }
-
+// PRELOADER STYLES ENDS HERE
+// KEYFRAMES STARTS HERE
 @keyframes lds-ring {
     0% {
         transform: rotate(0deg);
@@ -37,34 +40,29 @@ main {
         transform: rotate(360deg);
     }
 }
+// KEYFRAMES ENDS HERE
+// FLICKITY STYLES STARTS HERE
 .flickity-enabled {
     position: relative;
 }
-
 .flickity-enabled:focus {
     outline: none;
 }
-
 .flickity-viewport {
     overflow: hidden;
     position: relative;
     height: 100%;
 }
-
 .flickity-slider {
     position: absolute;
     width: 100%;
     height: 100%;
 }
-
-/* ---- previous/next buttons ---- */
-
 .flickity-prev-next-button {
     display: none;
 }
-
-/* ---- page dots ---- */
-
 .flickity-page-dots {
     display: none;
 }
+//FLICKITY STYLES ENDS HERE
+// MAIN STYLES ENDS HERE

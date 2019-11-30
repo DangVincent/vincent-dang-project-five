@@ -60,31 +60,61 @@ export default class Global extends Component {
         if (isLoading) {
             return(
                 <div className="timeSeriesContainer">
-                    <div className="preloader">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
                     <h3>global data</h3>
                     <ul>
                         <li>
                             <p>last updated</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
                         </li>
                         <li>
                             <p>high</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
                         </li>
                         <li>
                             <p>low</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
                         </li>
                         <li>
                             <p>volume</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
                         </li>
                         <li>
                             <p>change</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
                         </li>
                         <li>
                             <p>change (%)</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
                         </li>
                     </ul>
                 </div>
