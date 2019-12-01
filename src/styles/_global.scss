@@ -12,11 +12,25 @@
 html {
     font-size: 125%;
 }
+body {
+    background: linear-gradient(-45deg, #20a348, $accentColour, #23a6d5, $accentColour);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+
+    @keyframes gradientBG {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+}
 h1, h3, p {
     text-transform: capitalize;
-}
-h1, h2, h3 {
-    @include fontSize1(2rem);
 }
 h2, h3 {
     text-align: center;

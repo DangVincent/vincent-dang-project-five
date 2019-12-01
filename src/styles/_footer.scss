@@ -1,15 +1,17 @@
 // FOOTER STYLES STARTS HERE
 footer {
     text-align: center;
-        .tickerCell {
-            border: 1px solid black;
-            width: 10%;
-        }
-        .wrapper {
-            background: $primaryColour;
-            p {
-                margin: 0;
-                padding: 32px 0;
-            }
+    .tickerCarousel {
+        margin-top: 100px;
+        background: $quaternaryColour;
+    }
+    .tickerCell {
+        width: 10%;
+        color: $accentColour;
+    }
+    .wrapper {
+        p {
+            margin: 0;
         }
     }
+}

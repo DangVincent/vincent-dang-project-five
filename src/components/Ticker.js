@@ -48,8 +48,7 @@ export default class Ticker extends Component {
 
         const flickityOptions = {
             wrapAround: true,
-            autoPlay: 3000,
-            groupCells: true
+            autoPlay: 1000,
         }
 
         return (

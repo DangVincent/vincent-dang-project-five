@@ -1,20 +1,66 @@
 // MAIN STYLES STARTS HERE
 main {
+    h2 {
+        @include fontSize1(2rem);
+        margin: 0 0 50px;
+        padding-top: 20px;
+    }
+    h3 {
+        @include fontSize1(1.6rem);
+        text-transform: uppercase;
+        margin: 0;
+        padding: 5px 0;
+        background: $primaryColour;
+        border: 1px solid $quaternaryColour;
+        border-bottom: 0;
+        letter-spacing: 5px;
+    }
     ul {
         display: flex;
         justify-content: space-around;
-        margin-bottom: 50px;
-        border: 1px solid black;
-        padding-bottom: 50px;
+        border: 1px solid $quaternaryColour;
+        background: $accentColour;
+        li {
+            border: 1px solid $quaternaryColour;
+            width: 100%;
+            text-align: center;
+            padding-bottom: 50px;
+        }
+        p {
+            margin: 0;
+            &:nth-child(1) {
+                font-size: 1.5rem;
+            }
+            &:nth-child(2){
+                margin-top: 5px;
+                font-size: 1.3rem;
+                opacity: 0.7;
+            }
+        }
+    }
+    .timeSeriesButtons {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px 0;
+        button {
+            @include fontSize2(1.6rem);
+            background: none;
+            border: none;
+            text-transform: capitalize;
+            &:hover {
+                color: $primaryColour;
+                
+            }
+        }
     }
 }
 .preloader div {
-    box-sizing: border-box;
     display: block;
     position: absolute;
     width: 34px;
     height: 34px;
-    margin: 8px;
+    margin-top: 10px;
+    margin-left: 120px;
     border: 8px solid lightgreen;
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
@@ -44,9 +90,6 @@ main {
 // FLICKITY STYLES STARTS HERE
 .flickity-enabled {
     position: relative;
-}
-.flickity-enabled:focus {
-    outline: none;
 }
 .flickity-viewport {
     overflow: hidden;
