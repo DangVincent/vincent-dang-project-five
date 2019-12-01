@@ -10,7 +10,9 @@ main {
         text-transform: uppercase;
         margin: 0;
         padding: 5px 0;
-        background: $primaryColour;
+        background: $primaryColour; 
+        background: -webkit-linear-gradient(to right, $quinaryColour, $primaryColour);
+        background: linear-gradient(to right, $quinaryColour, $primaryColour);
         border: 1px solid $quaternaryColour;
         border-bottom: 0;
         letter-spacing: 5px;

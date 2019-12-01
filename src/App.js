@@ -17,6 +17,7 @@ export default class App extends Component {
       this.state = {
         stockName: '',
         stockSymbol: 'MSFT',
+        stockLetters: '',
         stockPrice: '',
         reactApiKey: process.env.REACT_APP_ALPHAVANTAGE_API_KEY,
         timeSeriesGlobal: true,
@@ -44,18 +45,20 @@ export default class App extends Component {
         this.setState({
           stockName: name,
           stockSymbol: symbol,
+          stockLetters: symbol,
           stockPrice: price,
           isLoading: false
         });
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error, 'That stock input does not exist!');
       }); 
     }
 
     componentDidMount() {
         this.getStockInfo();
     }
+
     handleSwitchGlobal = () => {
       this.setState({
         timeSeriesGlobal: true,
@@ -106,11 +109,20 @@ export default class App extends Component {
       });
     };
 
+    searchStockEquity = (event, userInput) => {
+      event.preventDefault();
+      this.setState({
+        stockSymbol: userInput
+      });
+      this.getStockInfo();
+    }
+
     render() {
       
       const {
         stockName, 
         stockSymbol,
+        stockLetters,
         stockPrice,
         reactApiKey,
         isLoading,
@@ -135,11 +147,11 @@ export default class App extends Component {
         return (
             <div className="App">
               <header>
-                <Header />
+                <Header searchStockEquity={this.searchStockEquity}/>
               </header>
               <main>
                 <div className="wrapper">
-                  <h2>{stockName} ({stockSymbol}) {stockPrice}</h2>
+                  <h2>{stockName} ({stockLetters}) {stockPrice}</h2>
 
                   {timeSeriesGlobal && <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
                   {timeSeriesIntraday && (!timeSeriesDaily) && (!timeSeriesWeekly) && (!timeSeriesMonthly) && <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}

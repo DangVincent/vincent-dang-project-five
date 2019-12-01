@@ -30,11 +30,11 @@ export default class Global extends Component {
             
             this.setState({
                 globalDate: dateValue,
-                globalHigh: highValue,
-                globalLow: lowValue,
+                globalHigh: Number(highValue).toFixed(2),
+                globalLow: Number(lowValue).toFixed(2),
                 globalVolume: volumeValue,
-                globalChange: changeValue,
-                globalChangePercent: changePercentValue,
+                globalChange: Number(changeValue).toFixed(2),
+                globalChangePercent: Number(changePercentValue).toFixed(2),
                 isLoading: false
             })
         }).catch((error) => {
@@ -44,6 +44,14 @@ export default class Global extends Component {
 
     componentDidMount() {
         this.getGlobalEquityData();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.stockEquitySymbol !== prevProps.stockEquitySymbol) { 
+            setTimeout(() => {
+                this.getGlobalEquityData();
+            }, 800);
+        }
     }
 
     render() {

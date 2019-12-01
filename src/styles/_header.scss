@@ -1,12 +1,20 @@
 // HEADER STYLES STARTS HERE
 header {
-    background: #6190E8; 
-    background: -webkit-linear-gradient(to right, #A7BFE8, $primaryColour);
-    background: linear-gradient(to right, #A7BFE8, $primaryColour);
+    background: $primaryColour; 
+    background: -webkit-linear-gradient(to right, $quinaryColour, $primaryColour);
+    background: linear-gradient(to right, $quinaryColour, $primaryColour);
     padding: 20px 0;
     border: 1px solid $quaternaryColour;
-    h1 {
-        margin: 0;
+    .wrapper {
+        display: flex;
+        align-items: center;
+        h1 {
+            margin: 0;
+            flex: 1 1 auto;
+        }
+        .searchInput {
+            
+        }
     }
 }
 //HEADER STYLES ENDS HERE
