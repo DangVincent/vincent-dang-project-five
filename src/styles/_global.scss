@@ -1,7 +1,7 @@
 // MIXINS STARTS HERE
 @mixin fontSize1($sizeValue) {
     font-size: $sizeValue;
-    font-family: 'Odibee Sans', cursive;
+    font-family: 'Bebas Neue', cursive;
 }
 @mixin fontSize2($sizeValue2) {
     font-size: $sizeValue2;
@@ -13,7 +13,7 @@ html {
     font-size: 125%;
 }
 body {
-    background: linear-gradient(-70deg, $primaryColour, $accentColour,  $accentColour, $quinaryColour);
+    background: linear-gradient(-70deg, $quinaryColour, $accentColour,  $quinaryColour, $accentColour);
     background-size: 400% 400%;
     animation: gradientBG 15s ease-in-out infinite;
 
@@ -57,11 +57,15 @@ ul li {
 .decrease {
     color: $tertiaryColour;
 }
+.animationBounce {
+    animation-iteration-count: infinite;
+}
 .wrapper {
     max-width: 1280px;
     width: 80%;
     margin: 0 auto;
 }
+// PRELOADER STYLES OBTAINED FROM HERE https://loading.io/css/
 // PRELOADER STYLES STARTS HERE
 .preloader {
     div {
@@ -73,7 +77,7 @@ ul li {
         left: 45%;
         border: 8px solid $secondaryColour;
         border-radius: 50%;
-        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        animation: ldsRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
         border-color: $secondaryColour transparent transparent transparent;
         &:nth-child(1) {
             animation-delay: -0.45s;
@@ -101,8 +105,51 @@ ul li {
         left: 48%;
     }
 }
+// Shake animation obtained from https://animista.net/play/attention/shake/shake-vertical
+.shakeVertical {
+	-webkit-animation: shakeVertical 5s cubic-bezier(0.550, 0.055, 0.675, 0.190) infinite both;
+	        animation: shakeVertical 5s cubic-bezier(0.550, 0.055, 0.675, 0.190) infinite both;
+}
+.shakeVerticalReverse {
+	-webkit-animation: shakeVerticalReverse 5s cubic-bezier(0.550, 0.055, 0.675, 0.190) infinite reverse both;
+	        animation: shakeVerticalReverse 5s cubic-bezier(0.550, 0.055, 0.675, 0.190) infinite reverse both;
+}
+.ldsHourglass {
+    display: inline-block;
+    position: absolute;
+    width: 80px;
+    bottom: 50%;
+    left: 50%;
+    height: 80px;
+    transform: translate(-50%);
+}
+.ldsHourglass:after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 32px solid #fff;
+    border-color: $secondaryColour transparent $secondaryColour transparent;
+    animation: ldsHourglass 1.2s infinite;
+}
 // KEYFRAMES STARTS HERE
-@keyframes lds-ring {
+@keyframes ldsHourglass {
+    0% {
+        transform: rotate(0);
+        animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+        transform: rotate(900deg);
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+        transform: rotate(1800deg);
+    }
+}
+@keyframes ldsRing {
     0% {
         transform: rotate(0deg);
     }
@@ -110,6 +157,120 @@ ul li {
         transform: rotate(360deg);
     }
 }
+@-webkit-keyframes shakeVertical {
+    0%,
+    100% {
+        -webkit-transform: translateY(0);
+                transform: translateY(0);
+    }
+    10%,
+    30%,
+    50%,
+    70% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+    }
+    20%,
+    40%,
+    60% {
+        -webkit-transform: translateY(-6px);
+                transform: translateY(-6px);
+    }
+    80% {
+        -webkit-transform: translateY(-4px);
+                transform: translateY(-4px);
+    }
+    90% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+    }
+    }
+    @keyframes shakeVertical {
+    0%,
+    100% {
+        -webkit-transform: translateY(0);
+                transform: translateY(0);
+    }
+    10%,
+    30%,
+    50%,
+    70% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+    }
+    20%,
+    40%,
+    60% {
+        -webkit-transform: translateY(-6px);
+                transform: translateY(-6px);
+    }
+    80% {
+        -webkit-transform: translateY(-4px);
+                transform: translateY(-4px);
+    }
+    90% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+    }
+}
+@-webkit-keyframes shakeVerticalReverse {
+    0%,
+    100% {
+        -webkit-transform: translateY(0);
+                transform: translateY(0);
+    }
+    10%,
+    30%,
+    50%,
+    70% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+    }
+    20%,
+    40%,
+    60% {
+        -webkit-transform: translateY(6px);
+                transform: translateY(6px);
+    }
+    80% {
+        -webkit-transform: translateY(4px);
+                transform: translateY(4px);
+    }
+    90% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+    }
+    }
+    @keyframes shakeVerticalReverse {
+    0%,
+    100% {
+        -webkit-transform: translateY(0);
+                transform: translateY(0);
+    }
+    10%,
+    30%,
+    50%,
+    70% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+    }
+    20%,
+    40%,
+    60% {
+        -webkit-transform: translateY(6px);
+                transform: translateY(6px);
+    }
+    80% {
+        -webkit-transform: translateY(4px);
+                transform: translateY(4px);
+    }
+    90% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+    }
+}
+
+
 // KEYFRAMES ENDS HERE
 // PRELOADER STYLES ENDS HERE
 // FLICKITY STYLES STARTS HERE

@@ -164,7 +164,7 @@ export default class Global extends Component {
                             className={increaseOrDecrease}
                         >
                             {globalChange}
-                            {(increaseOrDecrease === 'increase') ? <FontAwesomeIcon icon={faCaretUp} /> : (increaseOrDecrease === 'decrease') ? <FontAwesomeIcon icon={faCaretDown} /> : null}
+                            {(increaseOrDecrease === 'increase') ? <FontAwesomeIcon className="shakeVertical" icon={faCaretUp} /> : (increaseOrDecrease === 'decrease') ? <FontAwesomeIcon className="shakeVerticalReverse" icon={faCaretDown} /> : null}
                         </p>
                     </li>
                     <li>
@@ -173,7 +173,7 @@ export default class Global extends Component {
                             className={increaseOrDecrease}
                         >
                             {globalChangePercent}
-                            {(increaseOrDecrease === 'increase') ? <FontAwesomeIcon icon={faCaretUp} /> : (increaseOrDecrease === 'decrease') ? <FontAwesomeIcon icon={faCaretDown} /> : null}
+                            {(increaseOrDecrease === 'increase') ? <FontAwesomeIcon className="shakeVertical" icon={faCaretUp} /> : (increaseOrDecrease === 'decrease') ? <FontAwesomeIcon className="shakeVerticalReverse" icon={faCaretDown} /> : null}
                         </p>
                     </li>
                 </ul>

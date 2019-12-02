@@ -1,13 +1,13 @@
 // HEADER STYLES STARTS HERE
 header {
     background: $primaryColour; 
-    background: -webkit-linear-gradient(to right, $quinaryColour, $primaryColour);
-    background: linear-gradient(to right, $quinaryColour, $primaryColour);
     padding: 20px 0;
-    border: 1px solid $quaternaryColour;
     .wrapper {
         display: flex;
         align-items: center;
+        @media (max-width: 735px) {
+            flex-direction: column;
+        }
         h1 {
             @include fontSize1(2.4rem);
             margin: 0;
@@ -17,13 +17,32 @@ header {
             @include fontSize2(0.9rem);
             box-shadow: 4px 3px $quaternaryColour;
             width: 350px;
-            border-radius: 5px;
-            padding: 5px;
+            border-radius: 50px;
+            padding: 5px 0 5px 15px;
             border: none;
-            color: $quaternaryColour;
-            transition: box-shadow 0.1s ease-out;
+            background: $septenaryColour;
+            color: $accentColour;
+            transition: box-shadow 0.1s ease-out, background 0.2s ease-in;
+            @media (max-width: 735px) {
+                background: $accentColour;
+                color: $quaternaryColour;
+            }
+            @media (max-width: 530px) {
+                width: 250px;
+            }
+            &:hover,
+            &:focus {
+                color: $quaternaryColour
+            }
+            &:hover {
+                background:rgba(0,0,0,0.3);
+                @media (max-width: 530px) {
+                    background: none;
+                }
+            }
             &:focus {
                 box-shadow: none;
+                background:$accentColour;
             }
         }
     }   

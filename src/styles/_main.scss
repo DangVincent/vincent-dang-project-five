@@ -4,38 +4,57 @@ main {
         @include fontSize1(2rem);
         margin: 0 0 50px;
         padding-top: 20px;
+        letter-spacing: 2px;
+        @media (max-width: 735px) {
+            font-size: 1.6rem;
+        }
     }
     h3 {
-        @include fontSize1(1.6rem);
-        text-transform: uppercase;
+        @include fontSize1(1.8rem);
         margin: 0;
-        padding: 5px 0;
         background: $primaryColour; 
-        background: -webkit-linear-gradient(to right, $quinaryColour, $primaryColour);
-        background: linear-gradient(to right, $quinaryColour, $primaryColour);
-        border: 1px solid $quaternaryColour;
         border-bottom: 0;
-        letter-spacing: 5px;
+        letter-spacing: 2px;
+        @media (max-width: 735px) {
+            font-size: 1.5rem;
+        }
+    }
+    .timeSeriesContainer {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 5px 5px $quaternaryColour;
     }
     ul {
         display: flex;
         justify-content: space-around;
-        background: $accentColour;
+        @media (max-width: 1000px) {
+            flex-wrap: wrap;
+        }
         li {
-            border: 1px solid $quaternaryColour;
+            background: $accentColour;
             width: 100%;
             text-align: center;
             padding-bottom: 50px;
             position: relative;
+            @media (max-width: 1000px) {
+                padding: 20px 0;
+                border-top: 1px solid $quaternaryColour;
+            }
         }
         p {
             margin: 0;
             &:nth-child(1) {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+                @media (max-width: 735px) {
+                    font-size: 1.2rem;
+                }
             }
             &:nth-child(2){
                 margin-top: 5px;
-                font-size: 1.3rem;
+                font-size: 1.2rem;
+                @media (max-width: 735px) {
+                    font-size: 1rem;
+                }
             }
         }
     }
@@ -46,16 +65,17 @@ main {
         margin-top: 30px;
         button {
             @include fontSize2(1.6rem);
-            background: none;
-            border: 1px solid $quaternaryColour;
+            background: $accentColour;
+            border-radius: 5px;
+            border: none;
             padding: 5px 10px;
             box-shadow: -5px -5px $primaryColour, 5px 5px $quaternaryColour;
             text-transform: capitalize;
             transition: color 0.3s ease-in-out, text-shadow 0.5s ease-in, box-shadow 0.5s ease-in-out;
-            &:hover {
-                color: $primaryColour;
+            &:hover,
+            &:focus {
                 box-shadow: none;
-                text-shadow: 2px 2px $quaternaryColour;
+                text-shadow: 2px 2px $quinaryColour;
             }
         }
     }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // Sweet Alert library obtained from https://github.com/sweetalert2/sweetalert2
 import Swal from 'sweetalert2'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 export default class Weekly extends Component {
     constructor() {
@@ -11,6 +13,8 @@ export default class Weekly extends Component {
             weeklyLow: '',
             weeklyClose: '',
             weeklyVolume: '',
+            changeIncrease: false,
+            changeDecrease: false,
             isLoading: true
         }
     }
@@ -33,7 +37,19 @@ export default class Weekly extends Component {
             const lowValue = values[0]["3. low"];
             const closeValue = values[0]["4. close"];
             const volumeValue = values[0]["5. volume"];
-    
+            const closeValue2 = values[1]['4. close'];
+
+            if (closeValue > closeValue2) {
+                this.setState({
+                    changeIncrease: true
+                })
+            }
+            else if (closeValue < closeValue2) {
+                this.setState({
+                    changeDecrease: true
+                })
+            }
+
             this.setState({
                 weeklyHigh: Number(highValue).toFixed(2),
                 weeklyLow: Number(lowValue).toFixed(2),
@@ -52,7 +68,17 @@ export default class Weekly extends Component {
     }
 
     componentDidMount() {
+        this.setState({
+            changeDecrease: false,
+            changeIncrease: false
+        });
         this.getWeeklyEquityData();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.stockEquitySymbol !== prevProps.stockEquitySymbol) { 
+            this.getWeeklyEquityData();
+        }
     }
 
     render() {
@@ -61,6 +87,8 @@ export default class Weekly extends Component {
             weeklyLow,
             weeklyClose,
             weeklyVolume,
+            changeIncrease,
+            changeDecrease,
             isLoading
         } = this.state;
 
@@ -117,19 +145,29 @@ export default class Weekly extends Component {
                 <ul>
                     <li>
                         <p>high</p>
-                        <p>{weeklyHigh}</p>
+                        <p className={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}>
+                            {weeklyHigh}
+                            {(changeIncrease) ? <FontAwesomeIcon className="shakeVertical" icon={faCaretUp} /> : (changeDecrease) ? <FontAwesomeIcon className="shakeVerticalReverse" icon={faCaretDown} /> : null}
+                        </p>
                     </li>
                     <li>
                         <p>low</p>
-                        <p>{weeklyLow}</p>
+                        <p className={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}>
+                            {weeklyLow}
+                            {(changeIncrease) ? <FontAwesomeIcon className="shakeVertical" icon={faCaretUp} /> : (changeDecrease) ? <FontAwesomeIcon className="shakeVerticalReverse" icon={faCaretDown} /> : null}
+                        </p>
                     </li>
                     <li>
                         <p>close</p>
-                        <p>{weeklyClose}</p>
+                        <p className={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}>
+                            {weeklyClose}
+                        </p>
                     </li>
                     <li>
                         <p>volume</p>
-                        <p>{weeklyVolume}</p>
+                        <p className={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}>
+                            {weeklyVolume}
+                        </p>
                     </li>
                 </ul>
             </div>

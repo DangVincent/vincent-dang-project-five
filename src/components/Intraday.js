@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 // Sweet Alert library obtained from https://github.com/sweetalert2/sweetalert2
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 export default class Intraday extends Component {
     constructor() {
@@ -11,6 +13,8 @@ export default class Intraday extends Component {
             intradayLow: '',
             intradayClose: '',
             intradayVolume: '',
+            changeIncrease: false,
+            changeDecrease: false,
             isLoading: true
         }
     }
@@ -34,6 +38,18 @@ export default class Intraday extends Component {
             const lowValue = values[0]['3. low'];
             const closeValue = values[0]['4. close'];
             const volumeValue = values[0]['5. volume'];
+            const closeValue2 = values[1]['4. close'];
+
+            if (closeValue > closeValue2) {
+                this.setState({
+                    changeIncrease: true
+                })
+            }
+            else if (closeValue < closeValue2) {
+                this.setState({
+                    changeDecrease: true
+                })
+            }
 
             this.setState({
                 intradayHigh: Number(highValue).toFixed(2),
@@ -53,7 +69,17 @@ export default class Intraday extends Component {
     }
 
     componentDidMount() {
+        this.setState({
+            changeDecrease: false,
+            changeIncrease: false
+        });
         this.getIntradayEquityData();        
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.stockEquitySymbol !== prevProps.stockEquitySymbol) { 
+                this.getIntradayEquityData();
+        }
     }
 
     render() {       
@@ -62,6 +88,8 @@ export default class Intraday extends Component {
             intradayLow,
             intradayClose,
             intradayVolume,
+            changeIncrease,
+            changeDecrease,
             isLoading
         } = this.state;
 
@@ -118,19 +146,25 @@ export default class Intraday extends Component {
                 <ul>
                     <li>
                         <p>high</p>
-                        <p>{intradayHigh}</p>
+                        <p className={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}>
+                            {intradayHigh}
+                            {(changeIncrease) ? <FontAwesomeIcon className="shakeVertical" icon={faCaretUp} /> : (changeDecrease) ? <FontAwesomeIcon className="shakeVerticalReverse" icon={faCaretDown} /> : null}    
+                        </p>
                     </li>
                     <li>
                         <p>low</p>
-                        <p>{intradayLow}</p>
+                        <p className={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}>
+                            {intradayLow}
+                            {(changeIncrease) ? <FontAwesomeIcon className="shakeVertical" icon={faCaretUp} /> : (changeDecrease) ? <FontAwesomeIcon className="shakeVerticalReverse" icon={faCaretDown} /> : null}
+                        </p>
                     </li>
                     <li>
                         <p>close</p>
-                        <p>{intradayClose}</p>
+                        <p className={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}>{intradayClose}</p>
                     </li>
                     <li>
                         <p>volume</p>
-                        <p>{intradayVolume}</p>
+                        <p className={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}>{intradayVolume}</p>
                     </li>
                 </ul>
             </div>

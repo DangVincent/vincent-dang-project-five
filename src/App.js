@@ -128,6 +128,13 @@ export default class App extends Component {
     // Search for the stock equity based on user input and call the axios function
     searchStockEquity = (event, userInput) => {
       event.preventDefault();
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Loading data',
+        showConfirmButton: false,
+        timer: 1500
+      });
       this.setState({
         stockSymbol: userInput,
         changeDecrease: false,
@@ -169,7 +176,7 @@ export default class App extends Component {
 
       if (isLoading) {
         return(
-          <div className="preloader2">
+          <div className="ldsHourglass">
               <div></div>
               <div></div>
               <div></div>
