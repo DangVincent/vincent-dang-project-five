@@ -18,6 +18,7 @@ export default class Global extends Component {
         }
     }
 
+    // Make axios call to gather the global/overview data and store it into state
     getGlobalEquityData() {
         axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${this.props.stockEquitySymbol}?timeseries=5`)
         .then((result) => {
@@ -42,8 +43,8 @@ export default class Global extends Component {
             if (changeValue !== 0) {
                 this.props.handleStockChange(changeValue);
             }
-        }).catch((error) => {
-            console.log(error);
+        }).catch(() => {
+            this.props.handleErrors();
         });
     }
 
@@ -72,6 +73,7 @@ export default class Global extends Component {
 
         const {increaseOrDecrease} = this.props;
 
+        // When the data is loading show preloader
         if (isLoading) {
             return(
                 <div className="timeSeriesContainer">
@@ -142,7 +144,7 @@ export default class Global extends Component {
                 <ul>
                     <li>
                         <p>last updated</p>
-                        <p className={increaseOrDecrease}>{globalDate}</p>
+                        <p>{globalDate}</p>
                     </li>
                     <li>
                         <p>high</p>

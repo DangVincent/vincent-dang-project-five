@@ -8,12 +8,14 @@ export default class Header extends Component {
         }
     }
 
+    // Handle any change to the search input and set state
     handleChange = (event) => {
         this.setState({
             userInput: event.target.value
         });
     }
 
+    // Handle submit function when the user submits an input
     handleSubmit = (event) => {
         event.preventDefault();
         const searchInput = this.state.userInput.toUpperCase();
@@ -26,7 +28,6 @@ export default class Header extends Component {
     }
 
     render() {
-        
         return (
             <div className="wrapper">
                 <h1><span>h-l</span> index</h1>

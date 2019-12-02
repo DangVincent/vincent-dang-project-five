@@ -9,6 +9,7 @@ header {
         display: flex;
         align-items: center;
         h1 {
+            @include fontSize1(2.4rem);
             margin: 0;
             flex: 1 0 auto;
         }

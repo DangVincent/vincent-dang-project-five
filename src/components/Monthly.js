@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// Sweet Alert library obtained from https://github.com/sweetalert2/sweetalert2
+import Swal from 'sweetalert2'
 
 export default class Monthly extends Component {
     constructor() {
@@ -13,8 +15,8 @@ export default class Monthly extends Component {
         }
     }
 
+    // Make axios to call to time series monthly and store results in state 
     getMonthlyEquityData() {
-
         axios({
             method:'GET',
             url: `https://www.alphavantage.co/query`,
@@ -40,8 +42,12 @@ export default class Monthly extends Component {
                 isLoading: false
             });
         })
-        .catch((error) => {
-            console.log(error);
+        .catch(() => {
+            Swal.fire(
+                'Error', 
+                'You have made too many requests, please wait a minute!', 
+                'error'
+            );
         });
     }
 
@@ -58,6 +64,7 @@ export default class Monthly extends Component {
             isLoading
         } = this.state;
 
+        // When the data is loading show preloader
         if (isLoading) {
             return(
                 <div className="timeSeriesContainer">

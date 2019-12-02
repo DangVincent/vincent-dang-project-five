@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
+// Sweet Alert library obtained from https://github.com/sweetalert2/sweetalert2
+import Swal from 'sweetalert2'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopyright } from '@fortawesome/free-regular-svg-icons';
 import Header from './components/Header';
@@ -31,8 +33,8 @@ export default class App extends Component {
       }
     }
     
+    // Make axios call when the app component mounts and store the default stock data into state
     getStockInfo() {
-  
       axios.get('https://financialmodelingprep.com/api/v3/company/stock/list')
       .then((result) => {
         const symbolsList = result.data.symbolsList;
@@ -40,7 +42,6 @@ export default class App extends Component {
         const stock = originalSymbolsList.filter((item) => {
           return item.symbol === this.state.stockSymbol;
         });
-        console.log(stock);
         const symbol = stock[0].symbol; 
         const name = stock[0].name;
         const price = stock[0].price;
@@ -52,8 +53,8 @@ export default class App extends Component {
           isLoading: false
         });
       })
-      .catch((error) => {
-        console.log(error, 'That stock input does not exist!');
+      .catch(() => {
+        this.handleErrors();
       }); 
     }
 
@@ -61,6 +62,15 @@ export default class App extends Component {
         this.getStockInfo();
     }
 
+    handleErrors = () => {
+      Swal.fire(
+          'Error', 
+          'Your have entered an incorrect stock name! Please enter a valid stock name. (Ex. MSFT, SPY)', 
+          'error'
+      );
+    }
+
+    // When user clicks on the global time series button, display the global data
     handleSwitchGlobal = () => {
       this.setState({
         timeSeriesGlobal: true,
@@ -71,6 +81,7 @@ export default class App extends Component {
       });
     };
 
+    // When user clicks on the intraday time series button, display the intraday data
     handleSwitchIntraday = () => {
       this.setState({
         timeSeriesIntraday: true,
@@ -81,6 +92,7 @@ export default class App extends Component {
       });
     };
 
+    // When user clicks on the daily time series button, display the daily data
     handleSwitchDaily = () => {
       this.setState({
         timeSeriesDaily: true,
@@ -91,6 +103,7 @@ export default class App extends Component {
       });
     };
 
+    // When user clicks on the weekly time series button, display the weekly data
     handleSwitchWeekly = () => {
       this.setState({
         timeSeriesWeekly: true,
@@ -101,6 +114,7 @@ export default class App extends Component {
       });
     };
 
+    // When user clicks on the monthly time series button, display the monthly data
     handleSwitchMonthly = () => {
       this.setState({
         timeSeriesMonthly: true,
@@ -111,6 +125,7 @@ export default class App extends Component {
       });
     };
 
+    // Search for the stock equity based on user input and call the axios function
     searchStockEquity = (event, userInput) => {
       event.preventDefault();
       this.setState({
@@ -121,6 +136,7 @@ export default class App extends Component {
       this.getStockInfo();
     }
 
+    // Determine if the stock increased or decreased based on the change value
     handleStockChange = (upOrDown) => {
       if (upOrDown > 0) {
         this.setState({
@@ -171,13 +187,12 @@ export default class App extends Component {
                 <div className="wrapper">
                   <h2>{stockName} ({stockLetters})</h2>
 
-                  {timeSeriesGlobal && <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol} handleStockChange={this.handleStockChange} increaseOrDecrease={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}  />}
+                  {timeSeriesGlobal && <Global handleErrors={this.handleErrors} apiKey={reactApiKey} stockEquitySymbol={stockSymbol} handleStockChange={this.handleStockChange} increaseOrDecrease={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}  />}
                   {timeSeriesIntraday && (!timeSeriesDaily) && (!timeSeriesWeekly) && (!timeSeriesMonthly) && <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
                   {timeSeriesDaily && (!timeSeriesIntraday) && (!timeSeriesWeekly) && (!timeSeriesMonthly) && <Daily apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
                   {timeSeriesWeekly && (!timeSeriesIntraday) && (!timeSeriesDaily) && (!timeSeriesMonthly) && <Weekly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> }
                   {timeSeriesMonthly && (!timeSeriesIntraday) && (!timeSeriesDaily) && (!timeSeriesWeekly) && <Monthly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> }
 
-                  
                   <div className="timeSeriesButtons">
                     {(!timeSeriesGlobal) ? <button onClick={this.handleSwitchGlobal}>global</button> : null}  
                     {(!timeSeriesIntraday) ? <button onClick={this.handleSwitchIntraday}>intraday</button> : null}

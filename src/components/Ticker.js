@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// flickity library obtained from https://www.npmjs.com/package/react-flickity-component
 import Flickity from 'react-flickity-component';
+// Sweet Alert library obtained from https://github.com/sweetalert2/sweetalert2
+import Swal from 'sweetalert2'
 
 export default class Ticker extends Component {
 
@@ -25,7 +28,11 @@ export default class Ticker extends Component {
                 isLoading: false
             })
         }).catch ((error) => {
-            console.log(error);
+            Swal.fire(
+                'Error', 
+                `An error has occurred, ${error.message}`, 
+                'error'
+            );
         });
     }
 
@@ -35,6 +42,7 @@ export default class Ticker extends Component {
             isLoading
         } = this.state
 
+        // When the data is loading show preloader
         if (isLoading) {
             return(
                 <div className="preloader3">

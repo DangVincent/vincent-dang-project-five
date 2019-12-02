@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// Sweet Alert library obtained from https://github.com/sweetalert2/sweetalert2
+import Swal from 'sweetalert2'
 
 export default class Weekly extends Component {
     constructor() {
@@ -13,8 +15,8 @@ export default class Weekly extends Component {
         }
     }
 
+    // Make axios call to timer series weekly and store results in state
     getWeeklyEquityData() {
-
         axios({
             method:'GET',
             url: `https://www.alphavantage.co/query`,
@@ -26,9 +28,7 @@ export default class Weekly extends Component {
                 }
         })
         .then((result) => {
-            // console.log(result.data['Weekly Time Series']);
             const values = Object.values(result.data['Weekly Time Series']);
-            // console.log(values[0]);
             const highValue = values[0]["2. high"];
             const lowValue = values[0]["3. low"];
             const closeValue = values[0]["4. close"];
@@ -42,8 +42,12 @@ export default class Weekly extends Component {
                 isLoading: false
             });
         })
-        .catch((error) => {
-            console.log(error);
+        .catch(() => {
+            Swal.fire(
+                'Error', 
+                'You have made too many requests, please wait a minute!', 
+                'error'
+            );
         });
     }
 
@@ -60,6 +64,7 @@ export default class Weekly extends Component {
             isLoading
         } = this.state;
 
+        // When the data is loading show preloader
         if (isLoading) {
             return(
                 <div className="timeSeriesContainer">

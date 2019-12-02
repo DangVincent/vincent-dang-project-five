@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// Sweet Alert library obtained from https://github.com/sweetalert2/sweetalert2
+import Swal from 'sweetalert2'
 
 export default class Intraday extends Component {
     constructor() {
@@ -13,6 +15,7 @@ export default class Intraday extends Component {
         }
     }
     
+    // Make axios call to time series intraday and store results in state
     getIntradayEquityData() {
         axios({
             method:'GET',
@@ -26,7 +29,6 @@ export default class Intraday extends Component {
                 }
         })
         .then((result) => {
-            console.log(result);
             const values = Object.values(result.data['Time Series (1min)']);
             const highValue = values[0]['2. high'];
             const lowValue = values[0]['3. low'];
@@ -41,8 +43,12 @@ export default class Intraday extends Component {
                 isLoading: false
             });
         })
-        .catch((error) => {
-            console.log(error);
+        .catch(() => {
+            Swal.fire(
+                'Error', 
+                'You have made too many requests, please wait a minute!', 
+                'error'
+            );
         });
     }
 
@@ -50,8 +56,7 @@ export default class Intraday extends Component {
         this.getIntradayEquityData();        
     }
 
-    render() {
-        
+    render() {       
         const {
             intradayHigh,
             intradayLow,
@@ -60,6 +65,7 @@ export default class Intraday extends Component {
             isLoading
         } = this.state;
 
+        // When the data is loading show preloader
         if (isLoading) {
             return(
                 <div className="timeSeriesContainer">
