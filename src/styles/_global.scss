@@ -51,9 +51,86 @@ ul {
 ul li {
     list-style-type: none;
 }
+.increase {
+    color: $secondaryColour;
+}
+.decrease {
+    color: $tertiaryColour;
+}
 .wrapper {
     max-width: 1280px;
     width: 80%;
     margin: 0 auto;
 }
+// PRELOADER STYLES STARTS HERE
+.preloader {
+    div {
+        display: block;
+        position: absolute;
+        width: 34px;
+        height: 34px;
+        margin-top: 10px;
+        left: 45%;
+        border: 8px solid $secondaryColour;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: $secondaryColour transparent transparent transparent;
+        &:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+        &:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+        &:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+    }
+}
+.preloader2 {
+    @extend .preloader;
+    div {
+        top: 45%;
+        height: 94px;
+        width: 94px;
+    }
+}
+.preloader3 {
+    @extend .preloader;
+    div {
+        top: 80%;
+        left: 48%;
+    }
+}
+// KEYFRAMES STARTS HERE
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+// KEYFRAMES ENDS HERE
+// PRELOADER STYLES ENDS HERE
+// FLICKITY STYLES STARTS HERE
+.flickity-enabled {
+    position: relative;
+}
+.flickity-viewport {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+.flickity-slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.flickity-prev-next-button {
+    display: none;
+}
+.flickity-page-dots {
+    display: none;
+}
+//FLICKITY STYLES ENDS HERE
 // GLOBAL STYLES ENDS HERE

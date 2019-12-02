@@ -27,6 +27,7 @@ main {
             width: 100%;
             text-align: center;
             padding-bottom: 50px;
+            position: relative;
         }
         p {
             margin: 0;
@@ -36,7 +37,6 @@ main {
             &:nth-child(2){
                 margin-top: 5px;
                 font-size: 1.3rem;
-                opacity: 0.7;
             }
         }
     }
@@ -44,70 +44,21 @@ main {
         display: flex;
         justify-content: space-around;
         padding: 20px 0;
+        margin-top: 30px;
         button {
             @include fontSize2(1.6rem);
             background: none;
-            border: none;
+            border: 1px solid $quaternaryColour;
+            padding: 5px 10px;
+            box-shadow: -5px -5px $primaryColour, 5px 5px $quaternaryColour;
             text-transform: capitalize;
+            transition: color 0.3s ease-in-out, text-shadow 0.5s ease-in, box-shadow 0.5s ease-in-out;
             &:hover {
                 color: $primaryColour;
-                
+                box-shadow: none;
+                text-shadow: 2px 2px $quaternaryColour;
             }
         }
     }
 }
-.preloader div {
-    display: block;
-    position: absolute;
-    width: 34px;
-    height: 34px;
-    margin-top: 10px;
-    margin-left: 120px;
-    border: 8px solid lightgreen;
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: lightgreen transparent transparent transparent;
-}
-// PRELOADER STYLES STARTS HERE
-.preloader div:nth-child(1) {
-    animation-delay: -0.45s;
-}
-.preloader div:nth-child(2) {
-    animation-delay: -0.3s;
-}
-.preloader div:nth-child(3) {
-    animation-delay: -0.15s;
-}
-// PRELOADER STYLES ENDS HERE
-// KEYFRAMES STARTS HERE
-@keyframes lds-ring {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-// KEYFRAMES ENDS HERE
-// FLICKITY STYLES STARTS HERE
-.flickity-enabled {
-    position: relative;
-}
-.flickity-viewport {
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-}
-.flickity-slider {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-.flickity-prev-next-button {
-    display: none;
-}
-.flickity-page-dots {
-    display: none;
-}
-//FLICKITY STYLES ENDS HERE
 // MAIN STYLES ENDS HERE

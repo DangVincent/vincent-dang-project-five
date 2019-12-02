@@ -20,6 +20,8 @@ export default class App extends Component {
         stockLetters: '',
         stockPrice: '',
         reactApiKey: process.env.REACT_APP_ALPHAVANTAGE_API_KEY,
+        changeIncrease: false,
+        changeDecrease: false,
         timeSeriesGlobal: true,
         timeSeriesIntraday: false,
         timeSeriesDaily: false,
@@ -112,9 +114,24 @@ export default class App extends Component {
     searchStockEquity = (event, userInput) => {
       event.preventDefault();
       this.setState({
-        stockSymbol: userInput
+        stockSymbol: userInput,
+        changeDecrease: false,
+        changeIncrease: false
       });
       this.getStockInfo();
+    }
+
+    handleStockChange = (upOrDown) => {
+      if (upOrDown > 0) {
+        this.setState({
+          changeIncrease: true
+        })
+      }
+      else {
+        this.setState({
+          changeDecrease: true
+        })
+      }
     }
 
     render() {
@@ -123,8 +140,9 @@ export default class App extends Component {
         stockName, 
         stockSymbol,
         stockLetters,
-        stockPrice,
         reactApiKey,
+        changeIncrease,
+        changeDecrease,
         isLoading,
         timeSeriesGlobal,
         timeSeriesIntraday,
@@ -135,7 +153,7 @@ export default class App extends Component {
 
       if (isLoading) {
         return(
-          <div className="preloader">
+          <div className="preloader2">
               <div></div>
               <div></div>
               <div></div>
@@ -151,9 +169,9 @@ export default class App extends Component {
               </header>
               <main>
                 <div className="wrapper">
-                  <h2>{stockName} ({stockLetters}) {stockPrice}</h2>
+                  <h2>{stockName} ({stockLetters})</h2>
 
-                  {timeSeriesGlobal && <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
+                  {timeSeriesGlobal && <Global apiKey={reactApiKey} stockEquitySymbol={stockSymbol} handleStockChange={this.handleStockChange} increaseOrDecrease={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}  />}
                   {timeSeriesIntraday && (!timeSeriesDaily) && (!timeSeriesWeekly) && (!timeSeriesMonthly) && <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
                   {timeSeriesDaily && (!timeSeriesIntraday) && (!timeSeriesWeekly) && (!timeSeriesMonthly) && <Daily apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
                   {timeSeriesWeekly && (!timeSeriesIntraday) && (!timeSeriesDaily) && (!timeSeriesMonthly) && <Weekly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> }

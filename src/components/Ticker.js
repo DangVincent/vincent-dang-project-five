@@ -37,7 +37,7 @@ export default class Ticker extends Component {
 
         if (isLoading) {
             return(
-                <div className="preloader">
+                <div className="preloader3">
                     <div></div>
                     <div></div>
                     <div></div>
@@ -48,7 +48,7 @@ export default class Ticker extends Component {
 
         const flickityOptions = {
             wrapAround: true,
-            autoPlay: 1000,
+            autoPlay: 1800,
         }
 
         return (
@@ -60,7 +60,10 @@ export default class Ticker extends Component {
             >
             {tickerList.map((ticker, index) => {
                 return (
-                    <div className={'tickerCell'} key={index}><p>{ticker.symbol} {ticker.price}</p></div>
+                    <div className={'tickerCell'} key={index}>
+                        <p>{ticker.symbol}</p>
+                        <p>{ticker.price}</p>
+                    </div>
                 )
             })}
             </Flickity>

@@ -63,7 +63,7 @@ export default class Intraday extends Component {
         if (isLoading) {
             return(
                 <div className="timeSeriesContainer">
-                    <h3>intraday data</h3>
+                    <h3>intraday data (1 min)</h3>
                     <ul>
                         <li>
                             <p>high</p>
@@ -108,7 +108,7 @@ export default class Intraday extends Component {
 
         return (
             <div className="timeSeriesContainer">
-                <h3>intraday data</h3>
+                <h3>intraday data (1 min)</h3>
                 <ul>
                     <li>
                         <p>high</p>

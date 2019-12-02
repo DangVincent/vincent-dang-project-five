@@ -10,11 +10,21 @@ header {
         align-items: center;
         h1 {
             margin: 0;
-            flex: 1 1 auto;
+            flex: 1 0 auto;
         }
         .searchInput {
-            
+            @include fontSize2(0.9rem);
+            box-shadow: 4px 3px $quaternaryColour;
+            width: 350px;
+            border-radius: 5px;
+            padding: 5px;
+            border: none;
+            color: $quaternaryColour;
+            transition: box-shadow 0.1s ease-out;
+            &:focus {
+                box-shadow: none;
+            }
         }
-    }
+    }   
 }
 //HEADER STYLES ENDS HERE

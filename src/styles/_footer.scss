@@ -2,16 +2,21 @@
 footer {
     text-align: center;
     .tickerCarousel {
-        margin-top: 100px;
+        margin-top: 40px;
         background: $quaternaryColour;
+        border-block: 5px solid $primaryColour;
     }
     .tickerCell {
         width: 10%;
         color: $accentColour;
+        padding: 1px 0;
+        p {
+            margin: 0;
+        }
     }
     .wrapper {
         p {
-            margin: 0;
+            margin: 10px 0 0;
         }
     }
 }

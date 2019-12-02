@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 export default class Global extends Component {
 
@@ -19,7 +21,6 @@ export default class Global extends Component {
     getGlobalEquityData() {
         axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${this.props.stockEquitySymbol}?timeseries=5`)
         .then((result) => {
-            console.log(result.data.historical[0]);
             const globalData = result.data.historical[0];
             const dateValue = globalData.date;
             const highValue = globalData.high;
@@ -37,6 +38,10 @@ export default class Global extends Component {
                 globalChangePercent: Number(changePercentValue).toFixed(2),
                 isLoading: false
             })
+
+            if (changeValue !== 0) {
+                this.props.handleStockChange(changeValue);
+            }
         }).catch((error) => {
             console.log(error);
         });
@@ -50,7 +55,7 @@ export default class Global extends Component {
         if(this.props.stockEquitySymbol !== prevProps.stockEquitySymbol) { 
             setTimeout(() => {
                 this.getGlobalEquityData();
-            }, 800);
+            }, 1500);
         }
     }
 
@@ -64,6 +69,8 @@ export default class Global extends Component {
             globalChangePercent,
             isLoading
         } = this.state;
+
+        const {increaseOrDecrease} = this.props;
 
         if (isLoading) {
             return(
@@ -135,27 +142,37 @@ export default class Global extends Component {
                 <ul>
                     <li>
                         <p>last updated</p>
-                        <p>{globalDate}</p>
+                        <p className={increaseOrDecrease}>{globalDate}</p>
                     </li>
                     <li>
                         <p>high</p>
-                        <p>{globalHigh}</p>
+                        <p className={increaseOrDecrease}>{globalHigh}</p>
                     </li>
                     <li>
                         <p>low</p>
-                        <p>{globalLow}</p>
-                    </li>
+                        <p className={increaseOrDecrease}>{globalLow}</p>
+                    </li>    
                     <li>
                         <p>volume</p>
-                        <p>{globalVolume}</p>
+                        <p className={increaseOrDecrease}>{globalVolume}</p>
                     </li>
                     <li>
                         <p>change</p>
-                        <p>{globalChange}</p>
+                        <p 
+                            className={increaseOrDecrease}
+                        >
+                            {globalChange}
+                            {(increaseOrDecrease === 'increase') ? <FontAwesomeIcon icon={faCaretUp} /> : (increaseOrDecrease === 'decrease') ? <FontAwesomeIcon icon={faCaretDown} /> : null}
+                        </p>
                     </li>
                     <li>
                         <p>change (%)</p>
-                        <p>{globalChangePercent}</p>
+                        <p 
+                            className={increaseOrDecrease}
+                        >
+                            {globalChangePercent}
+                            {(increaseOrDecrease === 'increase') ? <FontAwesomeIcon icon={faCaretUp} /> : (increaseOrDecrease === 'decrease') ? <FontAwesomeIcon icon={faCaretDown} /> : null}
+                        </p>
                     </li>
                 </ul>
             </div>
