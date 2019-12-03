@@ -21,6 +21,7 @@ export default class App extends Component {
         stockSymbol: 'MSFT',
         stockLetters: '',
         stockPrice: '',
+        stockList: [],
         reactApiKey: process.env.REACT_APP_ALPHAVANTAGE_API_KEY,
         changeIncrease: false,
         changeDecrease: false,
@@ -50,6 +51,7 @@ export default class App extends Component {
           stockSymbol: symbol,
           stockLetters: symbol,
           stockPrice: price,
+          stockList: originalSymbolsList,
           isLoading: false
         });
       })
@@ -163,6 +165,7 @@ export default class App extends Component {
         stockName, 
         stockSymbol,
         stockLetters,
+        stockList,
         reactApiKey,
         changeIncrease,
         changeDecrease,
@@ -188,7 +191,7 @@ export default class App extends Component {
         return (
             <div className="App">
               <header>
-                <Header searchStockEquity={this.searchStockEquity}/>
+                <Header stockList={stockList} searchStockEquity={this.searchStockEquity}/>
               </header>
               <main>
                 <div className="wrapper">

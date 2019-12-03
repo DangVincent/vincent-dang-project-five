@@ -8,6 +8,10 @@ header {
         @media (max-width: 735px) {
             flex-direction: column;
         }
+        .searchForm {
+            max-width: 100%;
+            position: relative;
+        }
         h1 {
             @include fontSize1(2.4rem);
             margin: 0;
@@ -15,9 +19,9 @@ header {
         }
         .searchInput {
             @include fontSize2(0.9rem);
+            z-index: 10;
             box-shadow: 4px 3px $quaternaryColour;
             width: 350px;
-            border-radius: 50px;
             padding: 5px 0 5px 15px;
             border: none;
             background: $septenaryColour;
@@ -34,18 +38,51 @@ header {
                 width: 225px;
             }
             &:hover,
-            &:focus {
-                color: $quaternaryColour
-            }
-            &:hover {
-                background: $accentColour;
-                @media (max-width: 530px) {
-                    background: none;
-                }
+            &:focus,
+            &:active {
+                color: $quaternaryColour;
+                background:$accentColour;
             }
             &:focus {
                 box-shadow: none;
-                background:$accentColour;
+            }
+        }
+        .noSuggestions {
+            color: $quaternaryColour;
+            padding: 1px;
+        }
+        .suggestions {
+            background: $accentColour;
+            @include fontSize2(1rem);
+            position: absolute;
+            max-height: 160px;
+            overflow-y: auto;
+            padding-left: 0;
+            width: 100%;
+            @media (max-width: 735px) {
+                font-size: 0.8rem;
+            }
+        }
+        .suggestions li {
+            padding: 5px 10px;
+            span {
+                &:nth-child(2) {
+                    margin-left: 50px;
+                }
+            }
+        }
+        .suggestions li:hover {
+            background: $primaryColour;
+            color: $accentColour;
+        }
+        .suggestions li:not(last-of-type) {
+            border-bottom: 1px solid $quaternaryColour;
+        }
+        .noSuggestions {
+            p {
+                @include fontSize2(0.8rem);
+                text-align: center;
+                margin: 0;
             }
         }
     }   
