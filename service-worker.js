@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/vincent-dang-project-five/precache-manifest.717ff89c35ca2052d4d0c6e266e5a7b5.js"
+  "/vincent-dang-project-five/precache-manifest.3cb6e0a3315df87f37c25713cd9e2f02.js"
 );
 
 self.addEventListener('message', (event) => {
