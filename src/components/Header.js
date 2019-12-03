@@ -26,43 +26,6 @@ export default class Header extends Component {
             userInput: event.target.value
         });
     };
-
-    // onClick = (e) => {
-    //     this.setState({
-    //         activeSuggestion: 0,
-    //         filteredSuggestions: [],
-    //         showSuggestions: false,
-    //         userInput: e.target.value
-    //     });
-    // };
-    // onKeyDown = (e) => {
-    //     const {activeSuggestion, filteredSuggestions} = this.state;
-
-    //     if (e.keyCode === 13) {
-    //         console.log(filteredSuggestions[activeSuggestion]);
-    //         this.setState({
-    //             activeSuggestion: 0,
-    //             showSuggestions: false,
-    //             userInput: filteredSuggestions[activeSuggestion]
-    //         });
-    //     }
-    //     else if (e.keyCode === 38) {
-    //         if (activeSuggestion === 0) {
-    //             return;
-    //         }
-    //         this.setState({
-    //             activeSuggestion: activeSuggestion - 1
-    //         });
-    //     }
-    //     else if (e.keyCode === 40) {
-    //         if (activeSuggestion - 1 === filteredSuggestions.length) {
-    //             return;
-    //         }
-    //         this.setState({
-    //             activeSuggestion: activeSuggestion + 1
-    //         });
-    //     }
-    // };
     // Handle submit function when the user submits an input
     handleSubmit = (event) => {
         event.preventDefault();
@@ -83,6 +46,7 @@ export default class Header extends Component {
             activeSuggestion
         } = this.state;
 
+        // sugegstion results obtained from https://alligator.io/react/react-autocomplete/
         let suggestionsListComponent;
 
         if (showSuggestions && userInput) {
