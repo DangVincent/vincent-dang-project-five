@@ -147,14 +147,14 @@ export default class Daily extends Component {
                         <p>high</p>
                         <p className={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}>
                             {dailyHigh}
-                            {(changeIncrease) ? <FontAwesomeIcon className="shakeVertical" icon={faCaretUp} /> : (changeDecrease) ? <FontAwesomeIcon className="shakeVerticalReverse" icon={faCaretDown} /> : null}
+                            {(changeIncrease) ? <span aria-hidden="true"><FontAwesomeIcon className="shakeVertical" icon={faCaretUp} /></span> : (changeDecrease) ? <span aria-hidden="true"><FontAwesomeIcon className="shakeVerticalReverse" icon={faCaretDown} /></span> : null}
                         </p>
                     </li>
                     <li>
                         <p>low</p>
                         <p className={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}>
                             {dailyLow}
-                            {(changeIncrease) ? <FontAwesomeIcon className="shakeVertical" icon={faCaretUp} /> : (changeDecrease) ? <FontAwesomeIcon className="shakeVerticalReverse" icon={faCaretDown} /> : null}
+                            {(changeIncrease) ? <span aria-hidden="true"><FontAwesomeIcon className="shakeVertical" icon={faCaretUp} /></span> : (changeDecrease) ? <span aria-hidden="true"><FontAwesomeIcon className="shakeVerticalReverse" icon={faCaretDown} /></span> : null}
                         </p>
                     </li>
                     <li>
