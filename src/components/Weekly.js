@@ -96,7 +96,7 @@ export default class Weekly extends Component {
         if (isLoading) {
             return(
                 <div className="timeSeriesContainer">
-                    <h3>weekly data</h3>
+                    <h3>weekly data (last week)</h3>
                     <ul>
                         <li>
                             <p>high</p>
@@ -141,7 +141,7 @@ export default class Weekly extends Component {
 
         return (
             <div className="timeSeriesContainer">
-                <h3>weekly data</h3>
+                <h3>weekly data (last week)</h3>
                 <ul>
                     <li>
                         <p>high</p>

@@ -96,7 +96,7 @@ export default class Monthly extends Component {
         if (isLoading) {
             return(
                 <div className="timeSeriesContainer">
-                    <h3>monthly data</h3>
+                    <h3>monthly data (last month)</h3>
                     <ul>
                         <li>
                             <p>high</p>
@@ -141,7 +141,7 @@ export default class Monthly extends Component {
 
         return (
             <div className="timeSeriesContainer">
-                <h3>monthly data</h3>
+                <h3>monthly data (last month)</h3>
                 <ul>
                     <li>
                         <p>high</p>

@@ -5,18 +5,31 @@ main {
         margin: 0 0 50px;
         padding-top: 20px;
         letter-spacing: 2px;
+        @media (max-width: 1000px) {
+            margin-bottom: 30px;
+        }
         @media (max-width: 735px) {
             font-size: 1.6rem;
+        }
+        @media (max-width: 530px) {
+            font-size: 1.4rem;
         }
     }
     h3 {
         @include fontSize1(1.8rem);
         margin: 0;
+        padding-top: 5px;
         background: $primaryColour; 
         border-bottom: 0;
         letter-spacing: 2px;
         @media (max-width: 735px) {
             font-size: 1.5rem;
+        }
+        @media (max-width: 530px) {
+            font-size: 1.3rem;
+        }
+        @media (max-width: 400px) {
+            letter-spacing: 0;
         }
     }
     .timeSeriesContainer {
@@ -37,7 +50,7 @@ main {
             padding-bottom: 50px;
             position: relative;
             @media (max-width: 1000px) {
-                padding: 20px 0;
+                padding: 20px 0 50px;
                 border-top: 1px solid $quaternaryColour;
             }
         }
@@ -52,6 +65,9 @@ main {
             &:nth-child(2){
                 margin-top: 5px;
                 font-size: 1.2rem;
+                @media (max-width: 1000px) {
+                    margin-top: 20px;
+                }
                 @media (max-width: 735px) {
                     font-size: 1rem;
                 }
@@ -63,6 +79,10 @@ main {
         justify-content: space-around;
         padding: 20px 0;
         margin-top: 30px;
+        @media (max-width: 735px) {
+            flex-direction: column;
+            justify-content: initial;
+        }
         button {
             @include fontSize2(1.6rem);
             background: $accentColour;
@@ -72,6 +92,11 @@ main {
             box-shadow: -5px -5px $primaryColour, 5px 5px $quaternaryColour;
             text-transform: capitalize;
             transition: color 0.3s ease-in-out, text-shadow 0.5s ease-in, box-shadow 0.5s ease-in-out;
+            @media (max-width: 735px) {
+                margin: 30px auto;
+                width: 50%;
+                font-size: 1.4rem;
+            }
             &:hover,
             &:focus {
                 box-shadow: none;

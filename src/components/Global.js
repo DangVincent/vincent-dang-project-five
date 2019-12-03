@@ -77,7 +77,7 @@ export default class Global extends Component {
         if (isLoading) {
             return(
                 <div className="timeSeriesContainer">
-                    <h3>global data</h3>
+                    <h3>global overview</h3>
                     <ul>
                         <li>
                             <p>last updated</p>
@@ -140,7 +140,7 @@ export default class Global extends Component {
 
         return (
             <div className="timeSeriesContainer">
-                <h3>global data</h3>
+                <h3>global overview</h3>
                 <ul>
                     <li>
                         <p>last updated</p>

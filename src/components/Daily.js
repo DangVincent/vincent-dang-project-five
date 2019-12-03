@@ -96,7 +96,7 @@ export default class Daily extends Component {
         if (isLoading) {
             return(
                 <div className="timeSeriesContainer">
-                    <h3>daily data</h3>
+                    <h3>daily data (yesterday)</h3>
                     <ul>
                         <li>
                             <p>high</p>
@@ -141,7 +141,7 @@ export default class Daily extends Component {
 
         return (
             <div className="timeSeriesContainer">
-                <h3>daily data</h3>
+                <h3>daily data (yesterday)</h3>
                 <ul>
                     <li>
                         <p>high</p>

@@ -1,7 +1,7 @@
 // HEADER STYLES STARTS HERE
 header {
     background: $primaryColour; 
-    padding: 20px 0;
+    padding: 20px 0 10px;
     .wrapper {
         display: flex;
         align-items: center;
@@ -30,12 +30,15 @@ header {
             @media (max-width: 530px) {
                 width: 250px;
             }
+            @media (max-width: 400px) {
+                width: 225px;
+            }
             &:hover,
             &:focus {
                 color: $quaternaryColour
             }
             &:hover {
-                background:rgba(0,0,0,0.3);
+                background: $accentColour;
                 @media (max-width: 530px) {
                     background: none;
                 }
@@ -46,5 +49,10 @@ header {
             }
         }
     }   
+}
+.swal2-html-container {
+    @media (max-width: 735px) {
+        font-size: 1rem;
+    }
 }
 //HEADER STYLES ENDS HERE

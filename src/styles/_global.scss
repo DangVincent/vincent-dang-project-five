@@ -79,6 +79,12 @@ ul li {
         border-radius: 50%;
         animation: ldsRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
         border-color: $secondaryColour transparent transparent transparent;
+        @media(max-width: 1000px) {
+            left: 48%;
+        }
+        @media(max-width: 1000px) {
+            left: 46%;
+        }
         &:nth-child(1) {
             animation-delay: -0.45s;
         }
@@ -101,8 +107,11 @@ ul li {
 .preloader3 {
     @extend .preloader;
     div {
-        top: 80%;
+        top: 0;
         left: 48%;
+        @media (max-width: 1000px) {
+            bottom: 0;
+        }
     }
 }
 // Shake animation obtained from https://animista.net/play/attention/shake/shake-vertical
