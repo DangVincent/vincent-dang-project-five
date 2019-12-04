@@ -90,7 +90,7 @@ export default class Header extends Component {
                 <h1><span>h-l</span> index</h1>
                 <form className="searchForm" onSubmit={this.handleSubmit}>
                     <label htmlFor="userInput" className="visuallyHidden">Enter a stock name</label>
-                    <input type="text" id="userInput" className="searchInput" placeholder="Search for a stock" value={userInput} 
+                    <input type="text" id="userInput" className="searchInput" placeholder="Search for a stock" autocomplete="off" value={userInput} 
                     onKeyDown={this.onKeyDown} 
                     onChange={this.handleChange}/>
                     {suggestionsListComponent}
