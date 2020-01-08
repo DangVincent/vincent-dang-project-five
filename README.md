@@ -12,6 +12,7 @@ Want to know what the latest value on a particular stock? This application utili
 * VSCode
 * React
 * RESTful APIs
+* [Animista](https://animista.net/) - Used to animate the increase and decrease arrows
 * [CSS Loader](https://loading.io/css/) - Used to show loading animations
 * [Sweet Alerts 2](https://cdn.jsdelivr.net/npm/sweetalert2@9) - Used to animate alerts for users when an event occurs
 * [Flickity](https://www.npmjs.com/package/react-flickity-component) - Used to create the stock ticker
