@@ -1,7 +1,7 @@
 # Welcome to H-L Index
 [Live Demo](https://dangvincent.github.io/vincent-dang-project-five/)
 
-![H-L Index App](https://i.imgur.com/6xmGiYW.jpg)
+![H-L Index App](https://i.imgur.com/xoVz2EJ.jpg)
 ## Description
 Want to know what the latest value on a particular stock? This application utilizes a REST API that retrieves and displays realtime and historical data of any stock. 
 ## Built With
