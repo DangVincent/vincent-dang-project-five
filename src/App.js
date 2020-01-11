@@ -215,7 +215,7 @@ export default class App extends Component {
               <footer>
                 <Ticker />
                 <div className="wrapper">
-                <p>copyright <span aria-hidden="true"><FontAwesomeIcon icon={faCopyright} /></span> vincent 2019</p>
+                <p>copyright <span aria-hidden="true"><FontAwesomeIcon icon={faCopyright} /></span> vincent <span id="year">{new Date().getFullYear()}</span></p>
                 </div>
               </footer>
             </div>

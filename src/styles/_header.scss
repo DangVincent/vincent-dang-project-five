@@ -24,8 +24,7 @@ header {
             width: 350px;
             padding: 5px 0 5px 15px;
             border: none;
-            background: $septenaryColour;
-            color: $accentColour;
+            color: $quaternaryColour;
             transition: box-shadow 0.1s ease-out, background 0.2s ease-in;
             @media (max-width: 735px) {
                 background: $accentColour;
@@ -36,12 +35,6 @@ header {
             }
             @media (max-width: 400px) {
                 width: 225px;
-            }
-            &:hover,
-            &:focus,
-            &:active {
-                color: $quaternaryColour;
-                background:$accentColour;
             }
             &:focus {
                 box-shadow: none;
