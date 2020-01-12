@@ -38,6 +38,17 @@ export default class Header extends Component {
         }
     }
 
+    // Event fired when the user clicks on a suggestion
+    onClick = (event) => {
+      // Update the user input and reset the rest of the state
+      this.setState({
+        activeSuggestion: 0,
+        filteredSuggestions: [],
+        showSuggestions: false,
+        userInput: event.currentTarget.id
+      });
+    };
+
     render() {
         const {
             userInput,
@@ -63,8 +74,8 @@ export default class Header extends Component {
                                 <li 
                                     className={className}
                                     key={index}
-                                    // onClick={this.onClick}
-                                    value={suggestion.symbol}
+                                    id={suggestion.symbol}
+                                    onClick={this.onClick}
                                 ><span>
                                     {suggestion.symbol}
                                 </span>
@@ -90,9 +101,9 @@ export default class Header extends Component {
                 <h1><span>h-l</span> index</h1>
                 <form className="searchForm" onSubmit={this.handleSubmit}>
                     <label htmlFor="userInput" className="visuallyHidden">Enter a stock name</label>
-                    <input type="text" id="userInput" className="searchInput" placeholder="Search for a stock" autocomplete="off" value={userInput} 
-                    onKeyDown={this.onKeyDown} 
+                    <input type="text" id="userInput" className="searchInput" placeholder="Search for a stock" autoComplete="off" value={userInput}  
                     onChange={this.handleChange}/>
+                    <input className="submitButton" type="submit" value="Submit"/>
                     {suggestionsListComponent}
                 </form>
             </div>

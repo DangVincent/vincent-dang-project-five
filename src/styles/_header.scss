@@ -1,7 +1,10 @@
 // HEADER STYLES STARTS HERE
 header {
     background: $primaryColour; 
-    padding: 20px 0 10px;
+    padding: 20px 0;
+    @media (max-width: 735px) {
+        padding: 10px 0 30px;
+    }
     .wrapper {
         display: flex;
         align-items: center;
@@ -19,6 +22,7 @@ header {
         }
         .searchInput {
             @include fontSize2(0.9rem);
+            position: relative;
             z-index: 10;
             box-shadow: 4px 3px $quaternaryColour;
             width: 350px;
@@ -39,14 +43,31 @@ header {
             &:focus {
                 box-shadow: none;
             }
+            &:focus + .submitButton {
+                border: 1px solid $quaternaryColour;
+            }
+            &:focus ~ .suggestions {
+                display: block;
+            }
+        }
+        .submitButton {
+            @include fontSize2(1rem);
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 10;
+            border: none;
+            background: $septenaryColour;
         }
         .noSuggestions {
             color: $quaternaryColour;
             padding: 1px;
         }
         .suggestions {
-            background: $accentColour;
             @include fontSize2(1rem);
+            display: none;
+            background: $accentColour;
             position: absolute;
             max-height: 160px;
             overflow-y: auto;
@@ -55,12 +76,20 @@ header {
             @media (max-width: 735px) {
                 font-size: 0.8rem;
             }
+            &:hover {
+                display: block;
+            }
         }
         .suggestions li {
             padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
             span {
                 &:nth-child(2) {
-                    margin-left: 50px;
+                    text-align: right;
+                    font-size: 0.9rem;
+                    opacity: 0.8;
                 }
             }
         }
@@ -72,6 +101,8 @@ header {
             border-bottom: 1px solid $quaternaryColour;
         }
         .noSuggestions {
+            position: absolute;
+            left: 10px;
             p {
                 @include fontSize2(0.8rem);
                 text-align: center;
