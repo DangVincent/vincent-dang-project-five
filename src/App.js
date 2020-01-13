@@ -63,7 +63,7 @@ export default class App extends Component {
     componentDidMount() {
       Swal.fire(
           'Welcome to H-L Index', 
-          'Want to know what the latest value on a particular stock? This application will display realtime data as well as historical data from last month, week, day and even last minute. Search for any stock in the search bar by entering a stock name. (Ex. MSFT, SPY)', 
+          'Want to know what the latest value on a particular stock? This application will display real-time data as well as historical data from last month, week, day and even last minute. Search for any stock in the search bar by entering a stock name. (Ex. MSFT, SPY)', 
           'info'
       );
       this.getStockInfo();
