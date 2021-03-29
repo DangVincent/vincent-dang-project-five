@@ -8,6 +8,7 @@ export default class Global extends Component {
     constructor() {
         super();
         this.state = {
+            globalPrice: '',
             globalDate: '',
             globalHigh: '',
             globalLow: '',
@@ -19,6 +20,16 @@ export default class Global extends Component {
     }
 
     // Make axios call to gather the global/overview data and store it into state
+    getCurrentPrice() {
+        axios.get(`https://financialmodelingprep.com/api/v3/quote-short/${this.props.stockEquitySymbol}?apikey=${this.props.apiKey}`)
+            .then((result) => {
+                const stockPrice = result.data[0].price;
+                this.setState({
+                    globalPrice: Number(stockPrice).toFixed(2)
+                });
+            });
+    }
+
     getGlobalEquityData() {
         axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${this.props.stockEquitySymbol}?timeseries=5&apikey=${this.props.apiKey}`)
         .then((result) => {
@@ -49,12 +60,14 @@ export default class Global extends Component {
     }
 
     componentDidMount() {
+        this.getCurrentPrice();
         this.getGlobalEquityData();
     }
 
     componentDidUpdate(prevProps) {
         if(this.props.stockEquitySymbol !== prevProps.stockEquitySymbol) { 
             setTimeout(() => {
+                this.getCurrentPrice();
                 this.getGlobalEquityData();
             }, 1500);
         }
@@ -62,6 +75,7 @@ export default class Global extends Component {
 
     render() {
         const {
+            globalPrice,
             globalHigh,
             globalLow,
             globalDate,
@@ -81,6 +95,15 @@ export default class Global extends Component {
                     <ul>
                         <li>
                             <p>last updated</p>
+                            <div className="preloader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </li>
+                        <li>
+                            <p>price</p>
                             <div className="preloader">
                                 <div></div>
                                 <div></div>
@@ -145,6 +168,10 @@ export default class Global extends Component {
                     <li>
                         <p>last updated</p>
                         <p>{globalDate}</p>
+                    </li>
+                    <li>
+                        <p>price</p>
+                        <p className={increaseOrDecrease}>{globalPrice}</p>
                     </li>
                     <li>
                         <p>high</p>
