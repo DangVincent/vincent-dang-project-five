@@ -23,6 +23,7 @@ export default class App extends Component {
         stockPrice: '',
         stockList: [],
         reactApiKey: process.env.REACT_APP_ALPHAVANTAGE_API_KEY,
+        reactApiKey2: process.env.REACT_APP_FINANCIALMODELPREP_API_KEY,
         changeIncrease: false,
         changeDecrease: false,
         timeSeriesGlobal: true,
@@ -36,7 +37,7 @@ export default class App extends Component {
     
     // Make axios call when the app component mounts and store the default stock data into state
     getStockInfo() {
-      axios.get('https://financialmodelingprep.com/api/v3/company/stock/list')
+      axios.get(`https://financialmodelingprep.com/api/v3/company/stock/list?apikey=${this.state.reactApiKey2}`)
       .then((result) => {
         const symbolsList = result.data.symbolsList;
         const originalSymbolsList = [...symbolsList];
@@ -172,6 +173,7 @@ export default class App extends Component {
         stockLetters,
         stockList,
         reactApiKey,
+        reactApiKey2,
         changeIncrease,
         changeDecrease,
         isLoading,
@@ -202,7 +204,7 @@ export default class App extends Component {
                 <div className="wrapper">
                   <h2>{stockName} ({stockLetters})</h2>
 
-                  {timeSeriesGlobal && <Global handleErrors={this.handleErrors} apiKey={reactApiKey} stockEquitySymbol={stockSymbol} handleStockChange={this.handleStockChange} increaseOrDecrease={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}  />}
+                  {timeSeriesGlobal && <Global handleErrors={this.handleErrors} apiKey={reactApiKey2} stockEquitySymbol={stockSymbol} handleStockChange={this.handleStockChange} increaseOrDecrease={(changeIncrease) ? 'increase' : (changeDecrease) ? 'decrease' : null}  />}
                   {timeSeriesIntraday && (!timeSeriesDaily) && (!timeSeriesWeekly) && (!timeSeriesMonthly) && <Intraday apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
                   {timeSeriesDaily && (!timeSeriesIntraday) && (!timeSeriesWeekly) && (!timeSeriesMonthly) && <Daily apiKey={reactApiKey} stockEquitySymbol={stockSymbol} />}
                   {timeSeriesWeekly && (!timeSeriesIntraday) && (!timeSeriesDaily) && (!timeSeriesMonthly) && <Weekly apiKey={reactApiKey} stockEquitySymbol={stockSymbol}/> }
@@ -218,7 +220,7 @@ export default class App extends Component {
                 </div> 
               </main>
               <footer>
-                <Ticker />
+                <Ticker apiKey={reactApiKey2}/>
                 <div className="wrapper">
                 <p>copyright <span aria-hidden="true"><FontAwesomeIcon icon={faCopyright} /></span> vincent <span id="year">{new Date().getFullYear()}</span></p>
                 </div>

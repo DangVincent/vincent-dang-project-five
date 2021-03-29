@@ -16,7 +16,7 @@ export default class Ticker extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://financialmodelingprep.com/api/v3/company/stock/list')
+        axios.get(`https://financialmodelingprep.com/api/v3/company/stock/list?apikey=${this.props.apiKey}`)
         .then((result) => {
             const symbolsList = result.data.symbolsList;
             const newSymbolsList = [];

@@ -33,6 +33,7 @@ export default class Intraday extends Component {
                 }
         })
         .then((result) => {
+            console.log(result);
             const values = Object.values(result.data['Time Series (1min)']);
             const highValue = values[0]['2. high'];
             const lowValue = values[0]['3. low'];

@@ -20,7 +20,7 @@ export default class Global extends Component {
 
     // Make axios call to gather the global/overview data and store it into state
     getGlobalEquityData() {
-        axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${this.props.stockEquitySymbol}?timeseries=5`)
+        axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${this.props.stockEquitySymbol}?timeseries=5&apikey=${this.props.apiKey}`)
         .then((result) => {
             const globalData = result.data.historical[0];
             const dateValue = globalData.date;
